@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.483" height="17.65" viewBox="0 0 16.483 17.65">
+  <g id="Group_351" data-name="Group 351" transform="translate(-626.372 -1639.806)">
+    <g id="signpost" transform="translate(626.372 1639.806)">
+      <path id="Path_264" data-name="Path 264" d="M309,195v3.764h4.087a.625.625,0,0,0,.446-.188l1.183-1.206a.628.628,0,0,0,.014-.864l-1.2-1.3a.625.625,0,0,0-.461-.2Zm0,0" transform="translate(-298.414 -188.407)" fill="#fff"/>
+      <path id="Path_265" data-name="Path 265" d="M5.9,75H1.809a.625.625,0,0,0-.446.188L.179,76.394a.628.628,0,0,0-.014.864l1.2,1.3a.625.625,0,0,0,.461.2H5.9Zm0,0" transform="translate(0 -72.648)" fill="#fff"/>
+      <path id="Path_266" data-name="Path 266" d="M220.882,16.352V.665A.647.647,0,0,0,220.255,0h-.627A.647.647,0,0,0,219,.665V16.352a.647.647,0,0,0,.627.665h.627A.647.647,0,0,0,220.882,16.352Zm0,0" transform="translate(-211.683)" fill="#fff"/>
+    </g>
+    <path id="Path_267" data-name="Path 267" d="M1.882,6.847V.278C1.882.125,1.6,0,1.255,0H.627C.281,0,0,.125,0,.278V6.847c0,.154.281.278.627.278h.627C1.6,7.126,1.882,7,1.882,6.847Zm0,0" transform="translate(638.193 1655.575) rotate(90)" fill="#fff"/>
+  </g>
+</svg>
