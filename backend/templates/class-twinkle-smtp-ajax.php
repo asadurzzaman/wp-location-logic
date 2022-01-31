@@ -21,7 +21,7 @@ if (!class_exists('TwinkleSMTPAdminAjax')) {
         }
 
         function twinkle_smtp_get_smtp_data() {
-            include_once TWINKLE_SMTP_PATH . "backend/api/get_smtp_data.php";
+            include_once TWINKLE_SMTP_PATH . "backend/api/get_logick_data.php";
             wp_die();
         }
 
