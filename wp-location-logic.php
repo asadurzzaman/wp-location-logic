@@ -31,4 +31,10 @@ require_once WP_LOCATION_LOGIC_PATH . 'includes/WPLocationLogic.php';
 //require_once WP_LOCATION_LOGIC_PATH . 'backend/class-twinkle-smtp-ajax.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/class-wp-location-logic-admin.php';
 
+function location_admin_scripts() {
+    wp_enqueue_script( 'admin-script', plugin_dir_url( __FILE__ ) . 'assets/js/great-script.js', array( 'jquery'
+    ), '1.0.0', true );
+}
+add_action( 'admin_enqueue_scripts', 'location_admin_scripts', 9999 );
+
 
