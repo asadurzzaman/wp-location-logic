@@ -43,7 +43,41 @@ $UserName = $UserData->display_name;
 
                 <div id="tab1">
                     <h3>Dashboard</h3>
-                    <p>Nothing wrong with washing your brush. Trees cover up a multitude of sins. Isn't that fantastic that you can make whole mountains in minutes? Have fun with it. It's hard to see things when you're too close. Take a step back and look. You could sit here for weeks with your one hair brush trying to do that - or you could do it with one stroke with an almighty brush.</p>
+                    <p>Nothing wrong with washing your brush. Trees cover up a multitude of sins. Isn't that
+                        fantastic that you can make whole mountains in minutes? Have fun with it. It's hard to see
+                        things when you're too close. Take a step back and look. You could sit here for weeks with your
+                        one hair brush trying to do that - or you could do it with one stroke with an almighty brush.</p>
+
+                        <select>
+                            <option value="if">If</option>
+                        </select>
+                        <select class="form-control category">
+                            <option value="">Condition Category</option>
+                            <option value="Custom Data">Custom Data</option>
+                            <option value="Geolocation">Geolocation</option>
+                            <option value="Logic Hop Goals">Logic Hop Goals</option>
+                            <option value="Time">Time</option>
+                            <option value="URL Parameters">URL Parameters</option>
+                            <option value="User Content Viewed">User Content Viewed</option>
+                            <option value="Visitor Behavior">Visitor Behavior</option>
+                            <option value="Visitor Data">Visitor Data</option>
+                            <option value="Visitor Device">Visitor Device</option>
+                            <option value="Visitor Metadata">Visitor Metadata</option>
+                        </select>
+                        <select>
+                            <option value="AND">And</option>
+                            <option value="OR">Or</option>
+                        </select>
+
+                    <div id="content">
+                        <button type="button" class="buttonImgTop cross" id="cross">X</button>
+                        <div id="ValuWrapper">
+                            ...content comes here... <br/>
+                            ...content comes here... <br/>
+                        </div>
+                    </div>
+                    <button type="button" class="buttonImg" id="repeat">Add</button>
+                    <button class="btn-copy" >Copy</button>
                 </div>
 
                 <div id="tab2">
@@ -106,6 +140,40 @@ $UserName = $UserData->display_name;
 
 
     });
+
+
+
+
+    $(function() {
+        var $original = $('#ValuWrapper'),
+            $crossButton = $('#cross'),
+            $content = $("#content");
+
+        $content.on("click", ".cross", function() {
+            if ($(this).is("#cross")) return false;
+            var $cross = $(this);
+            $(this).next().slideUp(400, function() {
+                $(this).remove();
+                $cross.remove();
+            });
+        });
+
+        $("#repeat").on("click", function() {
+            $content.append($crossButton.clone(true).removeAttr("id"));
+            $content.append(
+                $original.clone(true)
+                    .hide() // if sliding
+                    .attr("id",$original.attr("id")+$content.find("button.cross").length)
+                    .slideDown("slow") // does not slide much so remove if you do not like it
+            );
+        });
+
+    });
+
+
+
+
+
 
 
 </script>
