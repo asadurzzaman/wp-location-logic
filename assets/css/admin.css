@@ -13,13 +13,13 @@
     background: rgba(0, 0, 0, 0.78);
     color: #fefefe;
     margin-right: 0px;
+    padding: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .3s;
 }
-.tabs-nav a {
-    display: block;
-    padding: 15px 15px;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
+.tabs-nav li:hover{
+ background: #0d66c2;
 }
 .tabs-nav li.active {
     background: #FFF;
@@ -60,19 +60,23 @@
 }
 #wp_location_left_sidebar{
     background: #f5f5f5;
-    width: 35%;
+    width: 15%;
+    display: inline-block;
 }
 .wp_location_main_container{
     background: #f5f5f5;
     padding: 50px;
     border: 1px solid #cccccc;
     position: relative;
+    width: 50%;
+    display: inline-block;
 }
 
 #wp_location_right_sidebar{
     background: #f5f5f5;
     padding: 50px;
-    width: 40%;
+    width: 20%;
+    display: inline-block;
 }
 #wp_location_main_wrapper button {
     background: #ddd;
