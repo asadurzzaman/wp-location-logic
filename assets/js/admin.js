@@ -29,17 +29,22 @@ function twinkle_smtp_hide_all_views(){
 // });
 
 
-function section_5_tab_init(){
-    'use strict';
-    jQuery(".tab_body").hide();
-    jQuery(".tab_body[data-id='tab_lms']").show();
-    jQuery( "ul.tabs .tab_item").unbind( "click" );
-    jQuery( "ul.tabs .tab_item" ).bind( "click", function() {
-        jQuery( "ul.tabs .tab_item").removeClass('active');
-        jQuery(this).addClass('active');
+// function section_5_tab_init(){
+//     'use strict';
+//     jQuery(".tab_body").hide();
+//     jQuery(".tab_body[data-id='tab_lms']").show();
+//     jQuery( "ul.tabs .tab_item").unbind( "click" );
+//     jQuery( "ul.tabs .tab_item" ).bind( "click", function() {
+//         jQuery( "ul.tabs .tab_item").removeClass('active');
+//         jQuery(this).addClass('active');
+//
+//         jQuery(".tab_body").hide();
+//         jQuery(".tab_body[data-id='"+jQuery(this).data('target')+"']").show();
+//     });
+//
+// <<<<<<< HEAD
+// }
+// =======
+// });
 
-        jQuery(".tab_body").hide();
-        jQuery(".tab_body[data-id='"+jQuery(this).data('target')+"']").show();
-    });
 
-}
