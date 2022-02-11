@@ -36,5 +36,3 @@ function location_admin_scripts() {
     ), '1.0.0', true );
 }
 add_action( 'admin_enqueue_scripts', 'location_admin_scripts', 9999 );
-
-
