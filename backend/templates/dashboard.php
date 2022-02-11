@@ -43,42 +43,76 @@ $UserName = $UserData->display_name;
 
             <section class="tabs-content">
                 <div class="tab_body" data-id="dashboard">
-                    <h3>Dashboard</h3>
-                    <p>Nothing wrong with washing your brush. Trees cover up a multitude of sins. Isn't that
-                        fantastic that you can make whole mountains in minutes? Have fun with it. It's hard to see
-                        things when you're too close. Take a step back and look. You could sit here for weeks with your
-                        one hair brush trying to do that - or you could do it with one stroke with an almighty brush.</p>
+                    <h2><?php _e('Conditions', 'location-logic') ?></h2>
+                    <div id="wplc_condiction">
+                        <div id="demo" class="wplc_accordion">
+                            <div class="wplc_accordion_card">
+                                <div class="wplc_accordion_title">Accordion Title #1</div>
+                                <div class="wplc_accordion_panel">
+                                    <select>
+                                        <option value="if">If</option>
+                                    </select>
 
-                        <select>
-                            <option value="if">If</option>
-                        </select>
-                        <select class="form-control category">
-                            <option value="">Condition Category</option>
-                            <option value="Custom Data">Custom Data</option>
-                            <option value="Geolocation">Geolocation</option>
-                            <option value="Logic Hop Goals">Logic Hop Goals</option>
-                            <option value="Time">Time</option>
-                            <option value="URL Parameters">URL Parameters</option>
-                            <option value="User Content Viewed">User Content Viewed</option>
-                            <option value="Visitor Behavior">Visitor Behavior</option>
-                            <option value="Visitor Data">Visitor Data</option>
-                            <option value="Visitor Device">Visitor Device</option>
-                            <option value="Visitor Metadata">Visitor Metadata</option>
-                        </select>
-                        <select>
-                            <option value="AND">And</option>
-                            <option value="OR">Or</option>
-                        </select>
+                                    <select class="wplcation_select2" >
+                                        <option value="Condition Category">Condition Category</option>
+                                        <option value="Custom Data">Custom Data</option>
+                                        <option value="Geolocation">Geolocation</option>
+                                        <option value="Logic Hop Goals">Logic Hop Goals</option>
+                                        <option value="Time">Time</option>
+                                        <option value="URL Parameters">URL Parameters</option>
+                                        <option value="User Content Viewed">User Content Viewed</option>
+                                        <option value="Visitor Behavior">Visitor Behavior</option>
+                                        <option value="Visitor Data">Visitor Data</option>
+                                        <option value="Visitor Device">Visitor Device</option>
+                                        <option value="Visitor Metadata">Visitor Metadata</option>
+                                    </select>
 
-                    <div id="content">
-                        <button type="button" class="buttonImgTop cross" id="cross">X</button>
-                        <div id="ValuWrapper">
-                            ...content comes here... <br/>
-                            ...content comes here... <br/>
+                                    <select>
+                                        <option value="AND">And</option>
+                                        <option value="OR">Or</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wplc_accordion">
+                            <div class="wplc_accordion_card">
+                                <div class="wplc_accordion_title">Accordion Title #1</div>
+                                <div class="wplc_accordion_panel">
+                                    <select>
+                                        <option value="if">If</option>
+                                    </select>
+
+                                    <select class="wplcation_select2" >
+                                        <option value="Condition Category">Condition Category</option>
+                                        <option value="Custom Data">Custom Data</option>
+                                        <option value="Geolocation">Geolocation</option>
+                                        <option value="Logic Hop Goals">Logic Hop Goals</option>
+                                        <option value="Time">Time</option>
+                                        <option value="URL Parameters">URL Parameters</option>
+                                        <option value="User Content Viewed">User Content Viewed</option>
+                                        <option value="Visitor Behavior">Visitor Behavior</option>
+                                        <option value="Visitor Data">Visitor Data</option>
+                                        <option value="Visitor Device">Visitor Device</option>
+                                        <option value="Visitor Metadata">Visitor Metadata</option>
+                                    </select>
+
+                                    <select>
+                                        <option value="AND">And</option>
+                                        <option value="OR">Or</option>
+                                    </select>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button type="button" class="buttonImg" id="repeat">Add</button>
-                    <button class="btn-copy" >Copy</button>
+
+                    <button onclick="myFunction()"><span class="dashicons dashicons-insert"></span></button>
+                    <button onclick="myRemove()"><span class="dashicons dashicons-remove"></span></button>
+
+
+
+
                 </div>
                 <div class="tab_body" data-id="all_conditions">
                     <h3>All Conditions</h3>
@@ -131,6 +165,8 @@ $UserName = $UserData->display_name;
     jQuery(document).ready(function($){
         'use strict';
 
+        jQuery('.wplcation_select2').select2();
+
         jQuery("#tab_content .tab_body").hide();
         jQuery("#tab_content .tab_body[data-id='dashboard']").show();
 
@@ -145,6 +181,40 @@ $UserName = $UserData->display_name;
         });
 
     });
+
+    jQuery(function() {
+        jQuery('.wplc_accordion_title').click(function(j) {
+
+            var dropDown = jQuery(this).closest('.wplc_accordion_card').find('.wplc_accordion_panel');
+            jQuery(this).closest('.acc').find('.acc__panel').not(dropDown).slideUp();
+
+            if (jQuery(this).hasClass('active')) {
+                jQuery(this).removeClass('active');
+            } else {
+                jQuery(this).closest('.acc').find('.wplc_accordion_title.active').removeClass('active');
+                jQuery(this).addClass('active');
+            }
+
+            dropDown.stop(false, true).slideToggle();
+            j.preventDefault();
+        });
+    });
+
+
+    function myFunction() {
+        const node = document.getElementById("demo");
+        const clone = node.cloneNode(true);
+        document.getElementById("wplc_condiction").appendChild(clone);
+    };
+
+    function myRemove(){
+
+        const node = document.getElementById("demo");
+
+        if (node.parentNode) {
+            node.parentNode.removeChild(node);
+        }
+    }
 
 
 </script>

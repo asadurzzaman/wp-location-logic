@@ -29,9 +29,9 @@
 .tabs-nav li.active a {
     color: inherit;
 }
-.tabs-content div:not(:first-child) {
-    display: none;
-}
+/*.tabs-content div:not(:first-child) {*/
+/*    display: none;*/
+/*}*/
 
 #wp_location_main_wrapper{
     display: flex;
@@ -96,3 +96,61 @@ div#wp_location_main_wrapper button:hover{
     top: 10px;
     right: 5px;
 }
+.wp-core-ui select{
+    max-width: 30%;
+}
+.tab_body select{
+    width: 100%;
+}
+.select2-container {
+    width: 30% !important;
+}
+/* Accordion
+================================================== */
+.wplc_accordion {
+    margin-bottom: 10px;
+}
+.wplc_accordion_card {
+    position: relative;
+    border-left: 3px solid green;
+}
+.wplc_accordion_title {
+    background: #dfd9d9;
+    color: #000000;
+    font-weight: 400;
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px;
+    position: relative;
+    text-align: left;
+    border-radius: 3px;
+    border-bottom: 1px solid #ccc;
+}
+
+.wplc_accordion_title::after {
+     width: 8px;
+     height: 8px;
+     border-right: 1px solid #4a6e78;
+     border-bottom: 1px solid #4a6e78;
+     position: absolute;
+     right: 20px;
+     content: " ";
+     top: 17px;
+     transform: rotate(-45deg);
+     transition: all 0.2s ease-in-out;
+ }
+.wplc_accordion_title.active::after {
+     transform: rotate(45deg);
+     transition: all 0.2s ease-in-out;
+}
+.wplc_accordion_panel {
+    background: #dfd9d9;
+    color: #000000;
+    display: none;
+    margin: 0;
+    padding: 2em;
+    text-align: left;
+}
+
+
+
