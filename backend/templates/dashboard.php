@@ -39,84 +39,77 @@ $UserName = $UserData->display_name;
         </div>
         <div id="tab_content" class="wp_location_main_container">
 
-<!--            <button class="save_button top_button">Save Change</button>-->
-
             <section class="tabs-content">
-                <div class="tab_body" data-id="dashboard">
-                    <h2><?php _e('Conditions', 'location-logic') ?></h2>
-                    <div id="wplc_condiction">
-                        <div id="demo" class="wplc_accordion">
-                            <div class="wplc_accordion_card">
-                                <div class="wplc_accordion_title">Accordion Title #1</div>
-                                <div class="wplc_accordion_panel">
-                                    <select>
-                                        <option value="if">If</option>
-                                    </select>
-
-                                    <select class="wplcation_select2" >
-                                        <option value="Condition Category">Condition Category</option>
-                                        <option value="Custom Data">Custom Data</option>
-                                        <option value="Geolocation">Geolocation</option>
-                                        <option value="Logic Hop Goals">Logic Hop Goals</option>
-                                        <option value="Time">Time</option>
-                                        <option value="URL Parameters">URL Parameters</option>
-                                        <option value="User Content Viewed">User Content Viewed</option>
-                                        <option value="Visitor Behavior">Visitor Behavior</option>
-                                        <option value="Visitor Data">Visitor Data</option>
-                                        <option value="Visitor Device">Visitor Device</option>
-                                        <option value="Visitor Metadata">Visitor Metadata</option>
-                                    </select>
-
-                                    <select>
-                                        <option value="AND">And</option>
-                                        <option value="OR">Or</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wplc_accordion">
-                            <div class="wplc_accordion_card">
-                                <div class="wplc_accordion_title">Accordion Title #1</div>
-                                <div class="wplc_accordion_panel">
-                                    <select>
-                                        <option value="if">If</option>
-                                    </select>
-
-                                    <select class="wplcation_select2" >
-                                        <option value="Condition Category">Condition Category</option>
-                                        <option value="Custom Data">Custom Data</option>
-                                        <option value="Geolocation">Geolocation</option>
-                                        <option value="Logic Hop Goals">Logic Hop Goals</option>
-                                        <option value="Time">Time</option>
-                                        <option value="URL Parameters">URL Parameters</option>
-                                        <option value="User Content Viewed">User Content Viewed</option>
-                                        <option value="Visitor Behavior">Visitor Behavior</option>
-                                        <option value="Visitor Data">Visitor Data</option>
-                                        <option value="Visitor Device">Visitor Device</option>
-                                        <option value="Visitor Metadata">Visitor Metadata</option>
-                                    </select>
-
-                                    <select>
-                                        <option value="AND">And</option>
-                                        <option value="OR">Or</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="myFunction()"><span class="dashicons dashicons-insert"></span></button>
-                    <button onclick="myRemove()"><span class="dashicons dashicons-remove"></span></button>
-
-
-
+                <div class="tab_body" data-id="dashboard"> 
 
                 </div>
                 <div class="tab_body" data-id="all_conditions">
-                    <h3>All Conditions</h3>
-                    <p>We don't have anything but happy trees here. See. We take the corner of the brush and let it play back-and-forth. You can work and carry-on and put lots of little happy things in here. Without washing the brush, I'm gonna go right into some Van Dyke Brown, some Burnt Umber, and a little bit of Sap Green. This is a fantastic little painting. The first step to doing anything is to believe you can do it. See it finished in your mind before you ever start.</p>
+                    <div class="tab_body_header">
+                        <h2><?php _e('Conditions', 'location-logic') ?></h2>
+                        <button>Create Conditions</button>
+                    </div>
+                    <div id="wplc_condiction">
+                        <div id="demo" class="wplc_accordion">
+                            <div class="wplc_accordion_card">
+                                <div class="wplc_accordion_title"><label for="condition_name">Condition Name</label></div>
+                                <div class="wplc_accordion_panel">
+
+                                    <div class="wpcl_primary_condition">
+                                        <div class="condition_name">
+                                            <input type="text" id="condition_name" name="condition_name" value=""
+                                                   placeholder="Condition Name">
+                                        </div>
+                                        <select>
+                                            <option value="if">If</option>
+                                        </select>
+                                        <select class="wplcation_select2" >
+                                            <option value="Condition Category">Condition Category</option>
+                                            <option value="Custom Data">Custom Data</option>
+                                            <option value="Geolocation">Geolocation</option>
+                                            <option value="Logic Hop Goals">Logic Hop Goals</option>
+                                            <option value="Time">Time</option>
+                                            <option value="URL Parameters">URL Parameters</option>
+                                            <option value="User Content Viewed">User Content Viewed</option>
+                                            <option value="Visitor Behavior">Visitor Behavior</option>
+                                            <option value="Visitor Data">Visitor Data</option>
+                                            <option value="Visitor Device">Visitor Device</option>
+                                            <option value="Visitor Metadata">Visitor Metadata</option>
+                                        </select>
+                                        <button id="add_more_condition" class=""><span class="dashicons
+                                dashicons-insert"></span></button>
+                                    </div>
+
+                                    <div class="wpcl_secondary_condition">
+                                        <div class="secondary_condition_title">AND / OR </div>
+                                        <select>
+                                            <option value="AND">And</option>
+                                            <option value="OR">Or</option>
+                                        </select>
+
+                                        <select class="wplcation_select2" >
+                                            <option value="Condition Category">Condition Category</option>
+                                            <option value="Custom Data">Custom Data</option>
+                                            <option value="Geolocation">Geolocation</option>
+                                            <option value="Logic Hop Goals">Logic Hop Goals</option>
+                                            <option value="Time">Time</option>
+                                            <option value="URL Parameters">URL Parameters</option>
+                                            <option value="User Content Viewed">User Content Viewed</option>
+                                            <option value="Visitor Behavior">Visitor Behavior</option>
+                                            <option value="Visitor Data">Visitor Data</option>
+                                            <option value="Visitor Device">Visitor Device</option>
+                                            <option value="Visitor Metadata">Visitor Metadata</option>
+                                        </select>
+                                        <button id="remove_more_text" class="add_button"><span class="dashicons dashicons-remove "></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button id="remove_more_text" class="add_button"><span class="dashicons dashicons-remove "></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="tab_body" data-id="all_logic">
                     <h3>All Logic Blocks</h3>
@@ -201,20 +194,6 @@ $UserName = $UserData->display_name;
     });
 
 
-    function myFunction() {
-        const node = document.getElementById("demo");
-        const clone = node.cloneNode(true);
-        document.getElementById("wplc_condiction").appendChild(clone);
-    };
-
-    function myRemove(){
-
-        const node = document.getElementById("demo");
-
-        if (node.parentNode) {
-            node.parentNode.removeChild(node);
-        }
-    }
 
 
 </script>

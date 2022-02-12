@@ -32,7 +32,45 @@
 /*.tabs-content div:not(:first-child) {*/
 /*    display: none;*/
 /*}*/
-
+.tab_body_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
+}
+#wp_location_main_wrapper button.add_button span.dashicons{
+    font-size: 25px;
+}
+#wp_location_main_wrapper button.add_button{
+    position: absolute;
+    top: 3px;
+    right: -44px;
+    background: inherit;
+    border: 0px;
+}
+#wp_location_main_wrapper button.add_button:hover {
+    color: #d00;
+    background: inherit;
+}
+.wpcl_primary_condition {
+    position: relative;
+}
+#wp_location_main_wrapper button#add_more_condition{
+    float: right;
+    background: inherit !important;
+    position: absolute;
+    color: #f30303;
+    top: auto;
+    bottom: -48px;
+    right: -12px;
+    z-index: 1;
+}
+.wpcl_secondary_condition {
+    padding-left: 5px;
+    border-left: 2px solid #fff;
+    margin-top: 50px;
+    border-top: 1px solid #ffffff;
+}
 #wp_location_main_wrapper{
     display: flex;
     flex-direction: column;
@@ -97,13 +135,18 @@ div#wp_location_main_wrapper button:hover{
     right: 5px;
 }
 .wp-core-ui select{
-    max-width: 30%;
+    max-width: 100%;
+    margin-bottom: 10px;
 }
+.tab_body input[type=date],
+.tab_body input[type=number],
+.tab_body input[type=text],
 .tab_body select{
     width: 100%;
+    margin-bottom: 10px;
 }
 .select2-container {
-    width: 30% !important;
+    width: 100% !important;
 }
 /* Accordion
 ================================================== */
@@ -114,6 +157,7 @@ div#wp_location_main_wrapper button:hover{
     position: relative;
     border-left: 3px solid green;
 }
+.secondary_condition_title,
 .wplc_accordion_title {
     background: #dfd9d9;
     color: #000000;
