@@ -40,7 +40,7 @@ $UserName = $UserData->display_name;
         <div id="tab_content" class="wp_location_main_container">
 
             <section class="tabs-content">
-                <div class="tab_body" data-id="dashboard"> 
+                <div class="tab_body" data-id="dashboard">
 
                 </div>
                 <div class="tab_body" data-id="all_conditions">
@@ -113,7 +113,7 @@ $UserName = $UserData->display_name;
                 </div>
                 <div class="tab_body" data-id="all_logic">
                     <h3>All Logic Blocks</h3>
-                    <p>Isn't that fantastic? You can just push a little tree out of your brush like that. Happy painting, God bless. You better get your coat out, this is going to be a cold painting. And right there you got an almighty cloud. A fan brush can be your best friend. Look at them little rascals.</p>
+
                 </div>
                 <div class="tab_body" data-id="banner_bars">
                     <h3>All Logic Bars</h3>
@@ -192,8 +192,6 @@ $UserName = $UserData->display_name;
             j.preventDefault();
         });
     });
-
-
 
 
 </script>
