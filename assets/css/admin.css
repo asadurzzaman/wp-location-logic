@@ -13,13 +13,13 @@
     background: rgba(0, 0, 0, 0.78);
     color: #fefefe;
     margin-right: 0px;
+    padding: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .3s;
 }
-.tabs-nav a {
-    display: block;
-    padding: 15px 15px;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
+.tabs-nav li:hover{
+ background: #0d66c2;
 }
 .tabs-nav li.active {
     background: #FFF;
@@ -29,10 +29,48 @@
 .tabs-nav li.active a {
     color: inherit;
 }
-.tabs-content div:not(:first-child) {
-    display: none;
+/*.tabs-content div:not(:first-child) {*/
+/*    display: none;*/
+/*}*/
+.tab_body_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
 }
-
+#wp_location_main_wrapper button.add_button span.dashicons{
+    font-size: 25px;
+}
+#wp_location_main_wrapper button.add_button{
+    position: absolute;
+    top: 3px;
+    right: -44px;
+    background: inherit;
+    border: 0px;
+}
+#wp_location_main_wrapper button.add_button:hover {
+    color: #d00;
+    background: inherit;
+}
+.wpcl_primary_condition {
+    position: relative;
+}
+#wp_location_main_wrapper button#add_more_condition{
+    float: right;
+    background: inherit !important;
+    position: absolute;
+    color: #f30303;
+    top: auto;
+    bottom: -48px;
+    right: -12px;
+    z-index: 1;
+}
+.wpcl_secondary_condition {
+    padding-left: 5px;
+    border-left: 2px solid #fff;
+    margin-top: 50px;
+    border-top: 1px solid #ffffff;
+}
 #wp_location_main_wrapper{
     display: flex;
     flex-direction: column;
@@ -60,19 +98,23 @@
 }
 #wp_location_left_sidebar{
     background: #f5f5f5;
-    width: 35%;
+    width: 15%;
+    display: inline-block;
 }
 .wp_location_main_container{
     background: #f5f5f5;
     padding: 50px;
     border: 1px solid #cccccc;
     position: relative;
+    width: 50%;
+    display: inline-block;
 }
 
 #wp_location_right_sidebar{
     background: #f5f5f5;
     padding: 50px;
-    width: 40%;
+    width: 20%;
+    display: inline-block;
 }
 #wp_location_main_wrapper button {
     background: #ddd;
@@ -92,3 +134,67 @@ div#wp_location_main_wrapper button:hover{
     top: 10px;
     right: 5px;
 }
+.wp-core-ui select{
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.tab_body input[type=date],
+.tab_body input[type=number],
+.tab_body input[type=text],
+.tab_body select{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.select2-container {
+    width: 100% !important;
+}
+/* Accordion
+================================================== */
+.wplc_accordion {
+    margin-bottom: 10px;
+}
+.wplc_accordion_card {
+    position: relative;
+    border-left: 3px solid green;
+}
+.secondary_condition_title,
+.wplc_accordion_title {
+    background: #dfd9d9;
+    color: #000000;
+    font-weight: 400;
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px;
+    position: relative;
+    text-align: left;
+    border-radius: 3px;
+    border-bottom: 1px solid #ccc;
+}
+
+.wplc_accordion_title::after {
+     width: 8px;
+     height: 8px;
+     border-right: 1px solid #4a6e78;
+     border-bottom: 1px solid #4a6e78;
+     position: absolute;
+     right: 20px;
+     content: " ";
+     top: 17px;
+     transform: rotate(-45deg);
+     transition: all 0.2s ease-in-out;
+ }
+.wplc_accordion_title.active::after {
+     transform: rotate(45deg);
+     transition: all 0.2s ease-in-out;
+}
+.wplc_accordion_panel {
+    background: #dfd9d9;
+    color: #000000;
+    display: none;
+    margin: 0;
+    padding: 2em;
+    text-align: left;
+}
+
+
+
