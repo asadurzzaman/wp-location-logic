@@ -39,54 +39,81 @@ $UserName = $UserData->display_name;
         </div>
         <div id="tab_content" class="wp_location_main_container">
 
-<!--            <button class="save_button top_button">Save Change</button>-->
-
             <section class="tabs-content">
                 <div class="tab_body" data-id="dashboard">
-                    <h3>Dashboard</h3>
-                    <p>Nothing wrong with washing your brush. Trees cover up a multitude of sins. Isn't that
-                        fantastic that you can make whole mountains in minutes? Have fun with it. It's hard to see
-                        things when you're too close. Take a step back and look. You could sit here for weeks with your
-                        one hair brush trying to do that - or you could do it with one stroke with an almighty brush.</p>
 
-                        <select>
-                            <option value="if">If</option>
-                        </select>
-                        <select class="form-control category">
-                            <option value="">Condition Category</option>
-                            <option value="Custom Data">Custom Data</option>
-                            <option value="Geolocation">Geolocation</option>
-                            <option value="Logic Hop Goals">Logic Hop Goals</option>
-                            <option value="Time">Time</option>
-                            <option value="URL Parameters">URL Parameters</option>
-                            <option value="User Content Viewed">User Content Viewed</option>
-                            <option value="Visitor Behavior">Visitor Behavior</option>
-                            <option value="Visitor Data">Visitor Data</option>
-                            <option value="Visitor Device">Visitor Device</option>
-                            <option value="Visitor Metadata">Visitor Metadata</option>
-                        </select>
-                        <select>
-                            <option value="AND">And</option>
-                            <option value="OR">Or</option>
-                        </select>
-
-                    <div id="content">
-                        <button type="button" class="buttonImgTop cross" id="cross">X</button>
-                        <div id="ValuWrapper">
-                            ...content comes here... <br/>
-                            ...content comes here... <br/>
-                        </div>
-                    </div>
-                    <button type="button" class="buttonImg" id="repeat">Add</button>
-                    <button class="btn-copy" >Copy</button>
                 </div>
                 <div class="tab_body" data-id="all_conditions">
-                    <h3>All Conditions</h3>
-                    <p>We don't have anything but happy trees here. See. We take the corner of the brush and let it play back-and-forth. You can work and carry-on and put lots of little happy things in here. Without washing the brush, I'm gonna go right into some Van Dyke Brown, some Burnt Umber, and a little bit of Sap Green. This is a fantastic little painting. The first step to doing anything is to believe you can do it. See it finished in your mind before you ever start.</p>
+                    <div class="tab_body_header">
+                        <h2><?php _e('Conditions', 'location-logic') ?></h2>
+                        <button>Create Conditions</button>
+                    </div>
+                    <div id="wplc_condiction">
+                        <div id="demo" class="wplc_accordion">
+                            <div class="wplc_accordion_card">
+                                <div class="wplc_accordion_title"><label for="condition_name">Condition Name</label></div>
+                                <div class="wplc_accordion_panel">
+
+                                    <div class="wpcl_primary_condition">
+                                        <div class="condition_name">
+                                            <input type="text" id="condition_name" name="condition_name" value=""
+                                                   placeholder="Condition Name">
+                                        </div>
+                                        <select>
+                                            <option value="if">If</option>
+                                        </select>
+                                        <select class="wplcation_select2" >
+                                            <option value="Condition Category">Condition Category</option>
+                                            <option value="Custom Data">Custom Data</option>
+                                            <option value="Geolocation">Geolocation</option>
+                                            <option value="Logic Hop Goals">Logic Hop Goals</option>
+                                            <option value="Time">Time</option>
+                                            <option value="URL Parameters">URL Parameters</option>
+                                            <option value="User Content Viewed">User Content Viewed</option>
+                                            <option value="Visitor Behavior">Visitor Behavior</option>
+                                            <option value="Visitor Data">Visitor Data</option>
+                                            <option value="Visitor Device">Visitor Device</option>
+                                            <option value="Visitor Metadata">Visitor Metadata</option>
+                                        </select>
+                                        <button id="add_more_condition" class=""><span class="dashicons
+                                dashicons-insert"></span></button>
+                                    </div>
+
+                                    <div class="wpcl_secondary_condition">
+                                        <div class="secondary_condition_title">AND / OR </div>
+                                        <select>
+                                            <option value="AND">And</option>
+                                            <option value="OR">Or</option>
+                                        </select>
+
+                                        <select class="wplcation_select2" >
+                                            <option value="Condition Category">Condition Category</option>
+                                            <option value="Custom Data">Custom Data</option>
+                                            <option value="Geolocation">Geolocation</option>
+                                            <option value="Logic Hop Goals">Logic Hop Goals</option>
+                                            <option value="Time">Time</option>
+                                            <option value="URL Parameters">URL Parameters</option>
+                                            <option value="User Content Viewed">User Content Viewed</option>
+                                            <option value="Visitor Behavior">Visitor Behavior</option>
+                                            <option value="Visitor Data">Visitor Data</option>
+                                            <option value="Visitor Device">Visitor Device</option>
+                                            <option value="Visitor Metadata">Visitor Metadata</option>
+                                        </select>
+                                        <button id="remove_more_text" class="add_button"><span class="dashicons dashicons-remove "></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button id="remove_more_text" class="add_button"><span class="dashicons dashicons-remove "></span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="tab_body" data-id="all_logic">
                     <h3>All Logic Blocks</h3>
-                    <p>Isn't that fantastic? You can just push a little tree out of your brush like that. Happy painting, God bless. You better get your coat out, this is going to be a cold painting. And right there you got an almighty cloud. A fan brush can be your best friend. Look at them little rascals.</p>
+
                 </div>
                 <div class="tab_body" data-id="banner_bars">
                     <h3>All Logic Bars</h3>
@@ -130,6 +157,7 @@ $UserName = $UserData->display_name;
 
     jQuery(document).ready(function($){
         'use strict';
+        jQuery('.wplcation_select2').select2();
         jQuery("#tab_content .tab_body").hide();
         jQuery("#tab_content .tab_body[data-id='dashboard']").show();
 
@@ -143,6 +171,24 @@ $UserName = $UserData->display_name;
             jQuery("#tab_content .tab_body[data-id='" + jQuery(this).data('target') + "']").show();
         });
 
+    });
+
+    jQuery(function() {
+        jQuery('.wplc_accordion_title').click(function(j) {
+
+            var dropDown = jQuery(this).closest('.wplc_accordion_card').find('.wplc_accordion_panel');
+            jQuery(this).closest('.acc').find('.acc__panel').not(dropDown).slideUp();
+
+            if (jQuery(this).hasClass('active')) {
+                jQuery(this).removeClass('active');
+            } else {
+                jQuery(this).closest('.acc').find('.wplc_accordion_title.active').removeClass('active');
+                jQuery(this).addClass('active');
+            }
+
+            dropDown.stop(false, true).slideToggle();
+            j.preventDefault();
+        });
     });
 
 </script>

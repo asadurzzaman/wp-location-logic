@@ -40,10 +40,12 @@ if (!class_exists('WPLocationLogicAdmin')) {
         function wp_location_logic_admin_enqueue( $page )
         {
             if($page == "toplevel_page_wp-location-logic"){
+                $this->utils->enqueue_style('select2', 'select2.min.css');
                 $this->utils->enqueue_style('admin', 'admin.css');
                 $this->utils->enqueue_script('analytics', 'analytics.js', array('jquery'));
                 $this->utils->enqueue_script('settings', 'settings.js', array('jquery'));
                 $this->utils->enqueue_script('admin', 'admin.js', array('jquery'));
+                $this->utils->enqueue_script('select2', 'select2.min.js', array('jquery'));
             }
         }
 
