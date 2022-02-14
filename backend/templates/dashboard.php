@@ -130,7 +130,6 @@ $UserName = $UserData->display_name;
 
     jQuery(document).ready(function($){
         'use strict';
-
         jQuery("#tab_content .tab_body").hide();
         jQuery("#tab_content .tab_body[data-id='dashboard']").show();
 
@@ -145,6 +144,5 @@ $UserName = $UserData->display_name;
         });
 
     });
-
 
 </script>
