@@ -38,3 +38,75 @@ function location_admin_scripts() {
     ), '1.0.0', true );
 }
 add_action( 'admin_enqueue_scripts', 'location_admin_scripts', 9999 );
+
+
+// Geolocation must be enabled @ Woo Settings
+function wpcl_use_geolocated_user_country(){
+
+    $location = WC_Geolocation::geolocate_ip();
+    $country = $location['country'];
+    $state = $location['state'];
+    $city = $location['city'];
+    $postcode = $location['postcode'];
+
+    echo '<prev>';
+    var_dump($location);
+    echo '</prev>';
+// Lets use the country to e.g. echo greetings
+
+    switch ($country) {
+        case "BD":
+            $hello = "Hello Bangladesh!";
+            break;
+        case "IN":
+            $hello = "Namaste Indea!";
+            break;
+        default:
+            $hello = "Hello!";
+    }
+    echo $hello;
+}
+
+add_action( 'init', 'wpcl_use_geolocated_user_country' );
+
+
+/**
+ * @snippet       Hide Product Based on IP Address
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 4.0
+ * @donate $9     https://businessbloomer.com/bloomer-armada/
+ */
+
+add_filter( 'woocommerce_product_is_visible', 'bbloomer_hide_product_if_country', 9999, 2 );
+
+function bbloomer_hide_product_if_country( $visible, $product_id ){
+    $location = WC_Geolocation::geolocate_ip();
+    $country = $location['country'];
+    if ( $country === "IT" && $product_id === 344 ) {
+        $visible = false;
+    }
+    return $visible;
+}
+
+/**
+ * @snippet       Hide Product Based on IP Address
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 4.0
+ * @donate $9     https://businessbloomer.com/bloomer-armada/
+ */
+
+add_action( 'woocommerce_product_query', 'bbloomer_hide_product_if_country_new', 9999, 2 );
+
+function bbloomer_hide_product_if_country_new( $q, $query ) {
+    if ( is_admin() ) return;
+    $location = WC_Geolocation::geolocate_ip();
+    $hide_products = array( 21, 32 );
+    $country = $location['country'];
+    if ( $country === "US" ) {
+        $q->set( 'post__not_in', $hide_products );
+    }
+}
+
+
