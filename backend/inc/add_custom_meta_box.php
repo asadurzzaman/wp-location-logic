@@ -3,66 +3,29 @@
  * Adds a meta box to the post editing screen
  */
 function prfx_custom_meta() {
-    add_meta_box( 'prfx_meta', __( 'Meta Box Title', 'prfx-textdomain' ), 'new_meta_callback', 'product','side','high' );
+    add_meta_box(
+            'prfx_meta', __( 'WP Location Logic', 'prfx-textdomain' ),
+            'new_meta_callback',
+            'product',
+            'side',
+            ''
+    );
 }
 add_action( 'add_meta_boxes', 'prfx_custom_meta' );
-/**
- * Outputs the content of the meta box
- */
+
 function prfx_meta_callback( $post ) {
     echo 'This is a meta box';
 }
 
-/**
- * Outputs the content of the meta box
- */
 function new_meta_callback( $post ) {
     wp_nonce_field( basename( __FILE__ ), 'prfx_nonce' );
     $prfx_stored_meta = get_post_meta( $post->ID );
     ?>
 
     <p>
-        <label for="meta-text" class="prfx-row-title"><?php _e( 'Example Text Input', 'prfx-textdomain' )?></label>
-        <input type="text" name="meta-text" id="meta-text" value="<?php if ( isset ( $prfx_stored_meta['meta-text'] ) ) echo $prfx_stored_meta['meta-text'][0]; ?>" />
+    <p class="hide-if-no-js">
+        <a href="#">Set product image</a>
     </p>
-    <p>
-        <span class="prfx-row-title"><?php _e( 'Example Checkbox Input', 'prfx-textdomain' )?></span>
-    <div class="prfx-row-content">
-        <label for="meta-checkbox">
-            <input type="checkbox" name="meta-checkbox" id="meta-checkbox" value="yes" <?php if ( isset ( $prfx_stored_meta['meta-checkbox'] ) ) checked( $prfx_stored_meta['meta-checkbox'][0], 'yes' ); ?> />
-            <?php _e( 'Checkbox label', 'prfx-textdomain' )?>
-        </label>
-        <label for="meta-checkbox-two">
-            <input type="checkbox" name="meta-checkbox-two" id="meta-checkbox-two" value="yes" <?php if ( isset ( $prfx_stored_meta['meta-checkbox-two'] ) ) checked( $prfx_stored_meta['meta-checkbox-two'][0], 'yes' ); ?> />
-            <?php _e( 'Another checkbox', 'prfx-textdomain' )?>
-        </label>
-    </div>
-    </p>
-    <p>
-        <span class="prfx-row-title"><?php _e( 'Example Radio Buttons', 'prfx-textdomain' )?></span>
-    <div class="prfx-row-content">
-        <label for="meta-radio-one">
-            <input type="radio" name="meta-radio" id="meta-radio-one" value="radio-one" <?php if ( isset ( $prfx_stored_meta['meta-radio'] ) ) checked( $prfx_stored_meta['meta-radio'][0], 'radio-one' ); ?>>
-            <?php _e( 'Radio Option #1', 'prfx-textdomain' )?>
-        </label>
-        <label for="meta-radio-two">
-            <input type="radio" name="meta-radio" id="meta-radio-two" value="radio-two" <?php if ( isset ( $prfx_stored_meta['meta-radio'] ) ) checked( $prfx_stored_meta['meta-radio'][0], 'radio-two' ); ?>>
-            <?php _e( 'Radio Option #2', 'prfx-textdomain' )?>
-        </label>
-    </div>
-    </p>
-    <p>
-        <label for="meta-select" class="prfx-row-title"><?php _e( 'Example Select Input', 'prfx-textdomain' )?></label>
-        <select name="meta-select" id="meta-select">
-            <option value="select-one" <?php if ( isset ( $prfx_stored_meta['meta-select'] ) ) selected( $prfx_stored_meta['meta-select'][0], 'select-one' ); ?>><?php _e( 'One', 'prfx-textdomain' )?></option>';
-            <option value="select-two" <?php if ( isset ( $prfx_stored_meta['meta-select'] ) ) selected( $prfx_stored_meta['meta-select'][0], 'select-two' ); ?>><?php _e( 'Two', 'prfx-textdomain' )?></option>';
-        </select>
-    </p>
-    <p>
-        <label for="meta-color" class="prfx-row-title"><?php _e( 'Color Picker', 'prfx-textdomain' )?></label>
-        <input name="meta-color" type="text" value="<?php if ( isset ( $prfx_stored_meta['meta-color'] ) ) echo $prfx_stored_meta['meta-color'][0]; ?>" class="meta-color" />
-    </p>
-    <p>
         <label for="meta-image" class="prfx-row-title"><?php _e( 'Example File Upload', 'prfx-textdomain' )?></label>
         <input type="text" name="meta-image" id="meta-image" value="<?php if ( isset ( $prfx_stored_meta['meta-image'] ) ) echo $prfx_stored_meta['meta-image'][0]; ?>" />
         <input type="button" id="meta-image-button" class="button" value="<?php _e( 'Choose or Upload an Image', 'prfx-textdomain' )?>" />
@@ -71,9 +34,6 @@ function new_meta_callback( $post ) {
     <?php
 }
 
-/**
- * Saves the custom meta input
- */
 function prfx_meta_save( $post_id ) {
 
     // Checks save status
@@ -100,4 +60,59 @@ $meta_value = get_post_meta( get_the_ID(), 'meta-text', true );
 // Checks and displays the retrieved value
 if( !empty( $meta_value ) ) {
     echo $meta_value;
+}
+
+
+// Extra Meta Box add on Woocommerce Product Price Below
+add_action( 'woocommerce_product_options_general_product_data', 'wpcl_adv_product_options');
+function wpcl_adv_product_options(){
+
+    echo '<div class="options_group">';
+    woocommerce_wp_radio(array(
+        'options' => array(
+            "gio_location" => "GIO Location Based Priced",
+            "manual" => "Manual Price"
+        ),
+        'name' => '_price_per_word_character',
+        'value' => '',
+        'id' => '_price_per_word_character',
+        'label' => __('Set Price Per Word OR Price Per Character', 'woocommerce-price-per-word'),
+        'desc_tip' => 'true',
+        'description' => __('Choose whether to set ', 'woocommerce-price-per-word')
+    ));
+    echo '</div>';
+
+    echo '<div class="options_group">';
+    $options[''] = __( 'Select a value', 'woocommerce');
+    woocommerce_wp_select( array(
+        'id'      => 'super_product',
+        'value'   => get_post_meta( get_the_ID(), 'super_product', true ),
+        'label'   => 'This is a super product',
+        'options' =>  $options,
+        'desc_tip' => true,
+        'description' => 'If it is not a regular WooCommerce product',
+    ) );
+    echo '</div>';
+
+    echo '<div class="options_group">';
+    woocommerce_wp_checkbox(array(
+            'id' => '_is_web_font',
+        'label' => __('Web Font?', 'ss-wc-digital-details'),
+        'description' => __('Enable if this file is a Web Font.', 'ss-wc-digital-details'),
+        'wrapper_class' => 'hide_if_variable'
+    ));
+    echo '</div>';
+
+}
+
+
+add_action( 'woocommerce_process_product_meta', 'misha_save_fields', 10, 2 );
+function misha_save_fields( $id, $post ){
+
+    //if( !empty( $_POST['super_product'] ) ) {
+    update_post_meta( $id, 'super_product', $_POST['super_product'] );
+    //} else {
+    //	delete_post_meta( $id, 'super_product' );
+    //}
+
 }
