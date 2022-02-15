@@ -25,7 +25,7 @@ if (!class_exists('WPLocationLogicAdmin')) {
 
         function wp_location_logic_action_links($links) {
             $settings_url = add_query_arg( 'page', 'wp-location-logic', get_admin_url() . 'admin.php' );
-            $setting_arr = array('<a href="' . esc_url( $settings_url ) . '">Dashboard</a>');
+            $setting_arr = array('<a href="' . esc_url( $settings_url ) . '">Settings</a>');
             $links = array_merge($setting_arr, $links);
             return $links;
         }
