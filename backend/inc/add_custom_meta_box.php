@@ -70,13 +70,13 @@ function wpcl_adv_product_options(){
     echo '<div class="options_group">';
     woocommerce_wp_radio(array(
         'options' => array(
-            "gio_location" => "GIO Location Based Priced",
-            "manual" => "Manual Price"
+            "gio_location" => "Calculate prices by the exchange rate",
+            "manual" => " Set prices manually"
         ),
         'name' => '_price_per_word_character',
         'value' => '',
         'id' => '_price_per_word_character',
-        'label' => __('Set Price Per Word OR Price Per Character', 'woocommerce-price-per-word'),
+        'label' => __('Price for.....!', 'woocommerce-price-per-word'),
         'desc_tip' => 'true',
         'description' => __('Choose whether to set ', 'woocommerce-price-per-word')
     ));
