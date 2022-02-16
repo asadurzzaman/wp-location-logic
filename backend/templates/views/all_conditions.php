@@ -16,21 +16,38 @@
                     <select>
                         <option value="if">If</option>
                     </select>
-                    <select class="wplcation_select2" >
-                        <option value="Condition Category">Condition Category</option>
-                        <option value="Custom Data">Custom Data</option>
-                        <option value="Geolocation">Geolocation</option>
-                        <option value="Logic Hop Goals">Logic Hop Goals</option>
-                        <option value="Time">Time</option>
-                        <option value="URL Parameters">URL Parameters</option>
-                        <option value="User Content Viewed">User Content Viewed</option>
-                        <option value="Visitor Behavior">Visitor Behavior</option>
-                        <option value="Visitor Data">Visitor Data</option>
-                        <option value="Visitor Device">Visitor Device</option>
-                        <option value="Visitor Metadata">Visitor Metadata</option>
-                    </select>
-                    <button id="add_more_condition" class=""><span class="dashicons
-                                dashicons-insert"></span></button>
+                    <div class="condition_one">
+                        <select class="wplcation_select2" name="" id="condition_based" >
+                            <option value="Condition Category">Condition Category</option>
+                            <option value="Custom Data">Custom Data</option>
+                            <option value="Geolocation">Geolocation</option>
+                            <option value="Logic Hop Goals">Logic Hop Goals</option>
+                            <option value="Time">Time</option>
+                            <option value="URL Parameters">URL Parameters</option>
+                            <option value="User Content Viewed">User Content Viewed</option>
+                            <option value="Visitor Behavior">Visitor Behavior</option>
+                            <option value="Visitor Data">Visitor Data</option>
+                            <option value="Visitor Device">Visitor Device</option>
+                            <option value="Visitor Metadata">Visitor Metadata</option>
+                        </select>
+                    </div>
+                    <div class="all_select_condition">
+                        <div class="single_condition">
+                            <select name="" id="geolocation_based" class="wplcation_select2">
+                                <?php
+                                global $woocommerce;
+                                $countries_object  =   new WC_Countries();
+                                $countries         =   $countries_object->__get('countries');
+                                foreach ( $countries as $countrie){
+                                    echo "<option value='$countrie'>$countrie</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="add_more_condition" class=""><span class="dashicons dashicons-insert add"></span></button>
+                    <button id="add_more_condition2" class=""><span class="dashicons dashicons-remove remove"></span></button>
+
                 </div>
 
                 <div class="wpcl_secondary_condition">
@@ -56,9 +73,13 @@
                     <button id="remove_more_text" class="add_button"><span class="dashicons dashicons-remove "></span>
                     </button>
                 </div>
+                <div class="buttonbox"></div>
             </div>
             <button id="remove_more_text" class="add_button"><span class="dashicons dashicons-remove "></span>
             </button>
+
+
+
         </div>
     </div>
 
@@ -81,5 +102,20 @@
             dropDown.stop(false, true).slideToggle();
             j.preventDefault();
         });
+
+        // Clone and remove function
+        jQuery(".add").click(function(){
+            var clone = jQuery(".wpcl_secondary_condition:first").clone();
+            clone.find(".wpcl_secondary_condition").val("");
+            jQuery(".buttonbox").before(clone);
+        });
+
+        jQuery(".remove").click(function(){
+            jQuery(".wpcl_secondary_condition:last").remove();
+        });
+        
     });
 </script>
+<style>
+
+</style>

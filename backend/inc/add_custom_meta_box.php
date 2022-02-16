@@ -32,48 +32,4 @@ function new_wplc_product_custom_meta() {
 
 }
 
-/**
- * Extra Meta Box add on Woocommerce Product Price Below
- */
-add_action( 'woocommerce_product_options_general_product_data', 'wpcl_adv_product_options');
-function wpcl_adv_product_options(){
-
-    echo '<div class="options_group">';
-    woocommerce_wp_radio(array(
-        'options' => array(
-            "gio_location" => "Calculate prices by the exchange rate",
-            "manual" => " Set prices manually"
-        ),
-        'name' => '_price_per_word_character',
-        'value' => '',
-        'id' => '_price_per_word_character',
-        'label' => __('Price for.....!', 'woocommerce-price-per-word'),
-        'desc_tip' => 'true',
-        'description' => __('Choose whether to set ', 'woocommerce-price-per-word')
-    ));
-    echo '</div>';
-
-    echo '<div class="options_group">';
-    $options[''] = __( 'Select a value', 'woocommerce');
-    woocommerce_wp_select( array(
-        'id'      => 'super_product',
-        'value'   => get_post_meta( get_the_ID(), 'super_product', true ),
-        'label'   => 'This is a super product',
-        'options' =>  $options,
-        'desc_tip' => true,
-        'description' => 'If it is not a regular WooCommerce product',
-    ) );
-    echo '</div>';
-
-    echo '<div class="options_group">';
-    woocommerce_wp_checkbox(array(
-            'id' => '_is_web_font',
-        'label' => __('Web Font?', 'ss-wc-digital-details'),
-        'description' => __('Enable if this file is a Web Font.', 'ss-wc-digital-details'),
-        'wrapper_class' => 'hide_if_variable'
-    ));
-    echo '</div>';
-}
-
-
 
