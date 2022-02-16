@@ -113,7 +113,7 @@
         jQuery(".remove").click(function(){
             jQuery(".wpcl_secondary_condition:last").remove();
         });
-        
+
     });
 </script>
 <style>
