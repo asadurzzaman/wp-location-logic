@@ -41,7 +41,7 @@ function my_logic_function(){
     $geoloc = WC_Geolocation::geolocate_ip();
     $country_name = $geoloc['country'];
 
-    
+
     switch ($country_name) {
         case "BD":
             $country_name = "Bangladesh!";
