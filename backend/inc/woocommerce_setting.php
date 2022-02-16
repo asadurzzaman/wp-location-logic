@@ -1,4 +1,7 @@
 <?php
+global $woocommerce;
+global $product;
+
 // Register Custom Taxonomy
 function wplc_woo_taxonomy_add()  {
     $labels = array(
@@ -51,22 +54,38 @@ add_action( 'condition_add_form_fields', 'wplc_condition_add_term_fields' );
 
 
 
-//Add new taxonomy meta box on Add Product Page
-add_action( 'add_meta_boxes', 'wplc_add_meta_box');
-function wplc_add_meta_box() {
-    add_meta_box(
-        'condition_id',
-        'Set Condition',
-        'wplc_custom_metabox',
-        'product' ,
-        'side',
-        'core'
-    );
-}
-// Call back function for Custom Meta Box
-function wplc_custom_metabox( $value ) {
-    echo 'This is my taxonomy metabox';
-}
+////Add new taxonomy meta box on Add Product Page
+//add_action( 'add_meta_boxes', 'wplc_add_meta_box');
+//function wplc_add_meta_box() {
+//    add_meta_box(
+//        'condition_id',
+//        'Set Condition',
+//        'wplc_custom_metabox',
+//        'product' ,
+//        'side',
+//        'core'
+//    );
+//}
+//// Call back function for Custom Meta Box
+//function wplc_custom_metabox( $value ) {
+//
+//
+//    $countries_object  =   new WC_Countries();
+//    $countries         =   $countries_object->__get('countries');
+//    echo '<div class="options_group">';
+//    woocommerce_form_field(
+//        'the_country_field',
+//        array(
+//            'type'       => 'select',
+//            'class'      => array( 'select' ),
+//            'label'      => __('Select a country'),
+//            'placeholder'    => __('Enter something'),
+//            'options'    => $countries
+//        )
+//    );
+//    echo '</div>';
+//
+//}
 
 
 //// Custom Filed Product variation
