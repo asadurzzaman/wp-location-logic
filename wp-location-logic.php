@@ -33,35 +33,40 @@ require_once WP_LOCATION_LOGIC_PATH . 'backend/class-wp-location-logic-admin.php
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/woocommerce_setting.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_meta_box.php';
 
-function location_admin_scripts() {
-    wp_enqueue_script( 'admin-script', plugin_dir_url( __FILE__ ) . 'assets/js/great-script.js', array( 'jquery'
-    ), '1.0.0', true );
+
+
+add_shortcode('logic_help', 'my_logic_function');
+function my_logic_function(){
+
+    $geoloc = WC_Geolocation::geolocate_ip();
+    $country_name = $geoloc['country'];
+
+    switch ($country_name) {
+        case "BD":
+            $country_name = "Bangladesh!";
+            break;
+        case "CA":
+            $country_name = "Canada!";
+            break;
+        case "BR":
+            $country_name = "Brazil!";
+            break;
+        case "IN":
+            $country_name = "India!";
+            break;
+        case "NL":
+            $country_name = "Netherlands!";
+            break;
+        case "US":
+            $country_name = "United States!";
+            break;
+        default:
+            $country_name = "Other Country!";
+    }
+    echo $country_name;
+
 }
-add_action( 'admin_enqueue_scripts', 'location_admin_scripts', 9999 );
 
-
-//// Geolocation must be enabled @ Woo Settings
-//function wpcl_use_geolocated_user_country(){
-//
-//    $location = WC_Geolocation::geolocate_ip();
-//    $country = $location['country'];
-//    $state = $location['state'];
-//    $city = $location['city'];
-//    $postcode = $location['postcode'];
-//    var_dump($country);
-//    ?>
-<!--    <select name="" id="">-->
-<?php
-//
-//    foreach ( $country as $count){
-//
-//        ?>
-<!--        <option value="--><?php //echo $count; ?><!--">--><?php //echo $count; ?><!--</option>-->
-<!--    --><?php //}
-//    ?>
-<!--    </select>-->
-<!--        --><?php
-//}
 
 //
 //// Geolocation must be enabled @ Woo Settings
