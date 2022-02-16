@@ -61,6 +61,9 @@ function my_logic_function(){
         case "US":
             $country_name = "United States!";
             break;
+        case "PK":
+            $country_name = "Pakistan!";
+            break;
         default:
             $country_name = "Other Country!";
     }
