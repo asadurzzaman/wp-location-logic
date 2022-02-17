@@ -38,9 +38,10 @@ require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_meta_box.php';
 add_shortcode('logic_help', 'my_logic_function');
 function my_logic_function(){
 
+
+
     $geoloc = WC_Geolocation::geolocate_ip();
     $country_name = $geoloc['country'];
-
 
     switch ($country_name) {
         case "BD":
@@ -69,40 +70,16 @@ function my_logic_function(){
     }
     echo $country_name;
 
+    function ShopPage(){
+        if( is_shop() AND $country_name == "BD") {
+            //echo "Bangladesh Shop Page";
+            echo wc_get_page_permalink( 'Privacy Policy' );
+        }
+    }
+
 
 }
 
-
-//
-//// Geolocation must be enabled @ Woo Settings
-//function wpcl_use_geolocated_user_country(){
-//
-//    $location = WC_Geolocation::geolocate_ip();
-//    $country = $location['country'];
-//    $state = $location['state'];
-//    $city = $location['city'];
-//    $postcode = $location['postcode'];
-//
-//    echo '<prev>';
-//    var_dump($location);
-//    echo '</prev>';
-//// Lets use the country to e.g. echo greetings
-//
-//    switch ($country) {
-//        case "BD":
-//            $hello = "Hello Bangladesh!";
-//            break;
-//        case "IN":
-//            $hello = "Namaste Indea!";
-//            break;
-//        default:
-//            $hello = "Hello!";
-//    }
-//    echo $hello;
-//}
-//
-//add_action( 'init', 'wpcl_use_geolocated_user_country' );
-//
 //
 ///**
 // * @snippet       Hide Product Based on IP Address
