@@ -34,7 +34,7 @@ if (!class_exists('WPLocationLogicAdmin')) {
         function wp_location_logic_admin_menu()
         {
             $icon_url = WP_LOCATION_LOGIC_IMG_DIR . "twinkle_smtp_icon.svg";
-            add_menu_page("Location Logic", "Location Logic", 'manage_options', "wp-location-logic", array($this, 'wp_location_logic_admin_dashboard'), $icon_url, 6);
+            add_menu_page("Location Logic", "Location Logic", 'manage_options', "wp-location-logic", array($this, 'wp_location_logic_admin_dashboard'), $icon_url, 80);
         }
 
         function wp_location_logic_admin_enqueue( $page )

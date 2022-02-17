@@ -115,3 +115,53 @@ function load_variation_settings_fields( $variation ) {
 }
 
 
+// // Product Visible for country based
+add_filter( 'woocommerce_product_is_visible', 'wplc_hide_product_if_country', 9999, 2 );
+function wplc_hide_product_if_country( $visible, $product_id ){
+    global $product;
+    $location = WC_Geolocation::geolocate_ip();
+    $country = $location['country'];
+    if ( $country == "BD" && $product_id == 30 ) {
+        $visible = false;
+    }
+    return $visible;
+}
+
+// Shortcode
+add_shortcode('logic_help', 'my_logic_function');
+function my_logic_function(){
+
+    $geoloc = WC_Geolocation::geolocate_ip();
+    $country_name = $geoloc['country'];
+
+    switch ($country_name) {
+        case "BD":
+            $country_name = "Bangladesh!";
+            break;
+        case "CA":
+            $country_name = "Canada!";
+            break;
+        case "BR":
+            $country_name = "Brazil!";
+            break;
+        case "IN":
+            $country_name = "India!";
+            break;
+        case "NL":
+            $country_name = "Netherlands!";
+            break;
+        case "US":
+            $country_name = "United States!";
+            break;
+        case "PK":
+            $country_name = "Pakistan!";
+            break;
+        default:
+            $country_name = "Other Country!";
+    }
+    echo $country_name;
+
+}
+
+
+
