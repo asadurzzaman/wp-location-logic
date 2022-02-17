@@ -2,38 +2,6 @@
 global $woocommerce;
 global $product;
 
-////Add new taxonomy meta box on Add Product Page
-//add_action( 'add_meta_boxes', 'wplc_add_meta_box');
-//function wplc_add_meta_box() {
-//    add_meta_box(
-//        'condition_id',
-//        'Set Condition',
-//        'wplc_custom_metabox',
-//        'product' ,
-//        'side',
-//        'core'
-//    );
-//}
-//// Call back function for Custom Meta Box
-//function wplc_custom_metabox( $value ) {
-//
-//
-//    $countries_object  =   new WC_Countries();
-//    $countries         =   $countries_object->__get('countries');
-//    echo '<div class="options_group">';
-//    woocommerce_form_field(
-//        'the_country_field',
-//        array(
-//            'type'       => 'select',
-//            'class'      => array( 'select' ),
-//            'label'      => __('Select a country'),
-//            'placeholder'    => __('Enter something'),
-//            'options'    => $countries
-//        )
-//    );
-//    echo '</div>';
-//
-//}
 
 
 /**
@@ -108,12 +76,6 @@ function save_variation_settings_fields( $variation_id, $loop ) {
     }
 }
 
-function load_variation_settings_fields( $variation ) {
-    $variation['my_text_field'] = get_post_meta( $variation[ 'variation_id' ], 'my_text_field', true );
-
-    return $variation;
-}
-
 
 // // Product Visible for country based
 add_filter( 'woocommerce_product_is_visible', 'wplc_hide_product_if_country', 9999, 2 );
@@ -126,6 +88,21 @@ function wplc_hide_product_if_country( $visible, $product_id ){
     }
     return $visible;
 }
+
+
+add_action('save_post', 'mp_sync_on_product_save');
+function mp_sync_on_product_save( $con_value ){
+
+    if ( ! empty( $con_value ) ) {
+        update_post_meta( $con_value, '__the_country_field', esc_attr( $con_value ));
+    }
+}
+
+
+
+
+
+
 
 // Shortcode
 add_shortcode('logic_help', 'my_logic_function');
@@ -162,6 +139,7 @@ function my_logic_function(){
     echo $country_name;
 
 }
+
 
 
 
