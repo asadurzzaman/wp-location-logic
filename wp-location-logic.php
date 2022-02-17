@@ -35,89 +35,43 @@ require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_meta_box.php';
 
 
 
-add_shortcode('logic_help', 'my_logic_function');
-function my_logic_function(){
 
+function wplc_woocommerce_remove_featured_image( $html, $attachment_id ) {
 
+    global $post, $product;
+//    // Get the IDs.
+//    $attachment_ids = $product->get_gallery_image_ids();
+//    // If there are none, go ahead and return early - with the featured image included in the gallery.
+//    if ( ! $attachment_ids ) {
+//        return $html;
+//    }
 
-    $geoloc = WC_Geolocation::geolocate_ip();
-    $country_name = $geoloc['country'];
-
-    switch ($country_name) {
-        case "BD":
-            $country_name = "Bangladesh!";
-            break;
-        case "CA":
-            $country_name = "Canada!";
-            break;
-        case "BR":
-            $country_name = "Brazil!";
-            break;
-        case "IN":
-            $country_name = "India!";
-            break;
-        case "NL":
-            $country_name = "Netherlands!";
-            break;
-        case "US":
-            $country_name = "United States!";
-            break;
-        case "PK":
-            $country_name = "Pakistan!";
-            break;
-        default:
-            $country_name = "Other Country!";
+    // Look for the featured image.
+    $featured_image = get_post_thumbnail_id( $post->ID );
+    // If there is one, exclude it from the gallery.
+    if ( is_product() && $attachment_id === $featured_image ) {
+        $html = '';
     }
-    echo $country_name;
+    return $html;
+}
+add_filter( 'woocommerce_single_product_image_thumbnail_html', 'wplc_woocommerce_remove_featured_image', 10, 2 );
 
-    function ShopPage(){
-        if( is_shop() AND $country_name == "BD") {
-            //echo "Bangladesh Shop Page";
-            echo wc_get_page_permalink( 'Privacy Policy' );
-        }
-    }
+remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open');
+add_action('woocommerce_before_shop_loop_item', 'woocommerce_add_aff_link_open', 10);
 
 
+function woocommerce_add_aff_link_open(){
+    $product = wc_get_product(get_the_ID());
+    if ($product->is_type('external'))
+        echo '<a href="' .
+            $product->get_product_url() .
+            '" class="woocommerce-LoopProductImage-link">';
 }
 
-//
-///**
-// * @snippet       Hide Product Based on IP Address
-// * @how-to        Get CustomizeWoo.com FREE
-// * @author        Rodolfo Melogli
-// * @compatible    WooCommerce 4.0
-// * @donate $9     https://businessbloomer.com/bloomer-armada/
-// */
-//
-//add_filter( 'woocommerce_product_is_visible', 'bbloomer_hide_product_if_country', 9999, 2 );
-//
-//function bbloomer_hide_product_if_country( $visible, $product_id ){
-//    $location = WC_Geolocation::geolocate_ip();
-//    $country = $location['country'];
-//    if ( $country === "IT" && $product_id === 344 ) {
-//        $visible = false;
-//    }
-//    return $visible;
-//}
-//
-///**
-// * @snippet       Hide Product Based on IP Address
-// * @how-to        Get CustomizeWoo.com FREE
-// * @author        Rodolfo Melogli
-// * @compatible    WooCommerce 4.0
-// * @donate $9     https://businessbloomer.com/bloomer-armada/
-// */
-//
-//add_action( 'woocommerce_product_query', 'bbloomer_hide_product_if_country_new', 9999, 2 );
-//
-//function bbloomer_hide_product_if_country_new( $q, $query ) {
-//    if ( is_admin() ) return;
-//    $location = WC_Geolocation::geolocate_ip();
-//    $hide_products = array( 21, 32 );
-//    $country = $location['country'];
-//    if ( $country === "US" ) {
-//        $q->set( 'post__not_in', $hide_products );
-//    }
-//}
+function woocommerce_add_aff_link_close(){
+    $product = wc_get_product(get_the_ID());
+    if ($product->is_type('external'))
+        echo '</a>';
+}
 
 
