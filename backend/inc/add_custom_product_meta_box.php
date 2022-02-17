@@ -41,40 +41,16 @@ function woocommerce_product_custom_fields()
     echo '<div class="options_group">';
     $countries_object  =   new WC_Countries();
     $countries         =   $countries_object->__get('countries');
-
-    $countryid = implode('', get_post_meta($post->ID, '_the_country_field'));
-
-    /*woocommerce_form_field(
-        '_the_country_field',
-        array(
-            'type'       => 'select',
-            'class'      => array( 'select' ),
-            'label'      => __('Select a country'),
-            'placeholder'    => __('Enter something'),
-            'options'    => $countries,
-            'selected' => true,
-            'value' => get_post_meta('_the_country_field'),
-        )
-    );*/
+    $selected_country = implode('', get_post_meta($post->ID, '_the_country_field'));
 
     woocommerce_wp_select([
         'id'       => '_the_country_field',
         'label'    => __( 'Select', 'woocommerce' ),
         'selected' => true,
-        'value'    => $countryid,
+        'value'    => $selected_country,
         'options' => $countries,
     ]);
 
-
-//    function woo_add_spin() {
-//        woocommerce_wp_select([
-//            'id'       => '_the_country_field',
-//            'label'    => __( 'Select #spins: ', 'woocommerce' ),
-//            'selected' => true,
-//            'value'    => '24',
-//            'options' =>  $countries
-//        ]);
-//    }
     echo '</div>';
 }
 
@@ -82,10 +58,7 @@ function woocommerce_product_custom_fields()
 add_action('woocommerce_process_product_meta', 'woocommerce_product_custom_fields_save');
 function woocommerce_product_custom_fields_save($post_id)
 {
-//    echo '<pre>';
-//    print_r($_POST['_the_country_field']);
-//    echo '</pre>';
-//    die;
+
     // Custom Product Text Field
     $woocommerce_custom_product_text_field = $_POST['_custom_product_text_field'];
     if (!empty($woocommerce_custom_product_text_field)){
@@ -114,7 +87,7 @@ function woocommerce_product_custom_fields_save($post_id)
 /**
  * Adds a meta box to the Product editing screen right bar
  */
-/*function wplc_product_custom_meta() {
+function wplc_product_custom_meta() {
     add_meta_box(
             'prfx_meta', __( 'WP Location Logic', 'prfx-textdomain' ),
             'new_wplc_product_custom_meta',
@@ -123,31 +96,42 @@ function woocommerce_product_custom_fields_save($post_id)
             ''
     );
 }
-add_action( 'add_meta_boxes', 'wplc_product_custom_meta' );*/
+add_action( 'add_meta_boxes', 'wplc_product_custom_meta' );
 
-/*function new_wplc_product_custom_meta($fields) {
-
+function new_wplc_product_custom_meta() {
+    global $woocommerce, $post;
     $countries_object  =   new WC_Countries();
     $countries         =   $countries_object->__get('countries');
+    $selected_country = implode('', get_post_meta($post->ID, '_the_country_field'));
+//    $selected_country = get_post_meta($post->ID, '_the_country_field');
 
-//    echo "<pre>";
-//    var_dump($countries);
-//    echo "</pre>";
+    echo "<pre>";
+    var_dump($selected_country);
+    echo "</pre>";
+
 
     echo '<div class="options_group">';
-    woocommerce_form_field(
-        'the_country_field',
-        array(
-            'type'       => 'select',
-            'class'      => array( 'select' ),
-            'label'      => __('Select a country'),
-            'placeholder'    => __('Enter something'),
-            'options'    => $countries
-        )
-    );
+    woocommerce_wp_select([
+        'id'       => '_the_country_field',
+        'label'    => __( 'Select a country', 'woocommerce' ),
+        'selected' => true,
+        'value'    => $selected_country,
+        'options' => $countries,
+    ]);
+
     echo '</div>';
 
-}*/
+}
+add_action('woocommerce_process_product_meta', 'woocommerce_product_thumb_show_condition');
+function woocommerce_product_thumb_show_condition($post_id)
+{
+    if( !empty($_POST['_the_country_field']) ){
+        update_post_meta($post_id,'_the_country_field', $_POST['_the_country_field']);
+    }
+
+}
+
+
 
 
 // Add a custom field to Admin coupon settings pages
