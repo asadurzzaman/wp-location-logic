@@ -67,7 +67,7 @@ $UserName = $UserData->display_name;
 <!--            <button class="save_button bottom_button">Save Change</button>-->
 
         </div>
-        <?php include WP_LOCATION_LOGIC_PATH . "backend/templates/views/dashboard_sidebar.php"; ?>
+        <?php include WP_LOCATION_LOGIC_PATH . "backend/templates/views/dashboard_right_sidebar.php"; ?>
 
     </div>
 
