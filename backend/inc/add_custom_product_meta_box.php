@@ -107,10 +107,13 @@ function woocommerce_product_custom_fields_save($post_id){
 // // Product Visible for country based
 add_filter( 'woocommerce_product_is_visible', 'wplc_hide_product_if_country', 9999, 2 );
 function wplc_hide_product_if_country( $visible, $product_id ){
+
     global $product;
     global $selected_country;
     $location = WC_Geolocation::geolocate_ip();
     $country = $location['country'];
+
+
     if ( $country == $selected_country && $product_id == 30 ) {
         $visible = false;
     }
@@ -118,13 +121,13 @@ function wplc_hide_product_if_country( $visible, $product_id ){
 }
 
 
-add_action('save_post', 'mp_sync_on_product_save');
-function mp_sync_on_product_save( $con_value ){
-
-    if ( ! empty( $con_value ) ) {
-        update_post_meta( $con_value, '__the_country_field', esc_attr( $con_value ));
-    }
-}
+//add_action('save_post', 'mp_sync_on_product_save');
+//function mp_sync_on_product_save( $con_value ){
+//
+//    if ( ! empty( $con_value ) ) {
+//        update_post_meta( $con_value, '__the_country_field', esc_attr( $con_value ));
+//    }
+//}
 
 
 
