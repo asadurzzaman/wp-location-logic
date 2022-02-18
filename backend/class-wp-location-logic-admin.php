@@ -42,6 +42,7 @@ if (!class_exists('WPLocationLogicAdmin')) {
             if($page == "toplevel_page_wp-location-logic"){
                 $this->utils->enqueue_style('select2', 'select2.min.css');
                 $this->utils->enqueue_style('admin', 'admin.css');
+
                 $this->utils->enqueue_script('analytics', 'analytics.js', array('jquery'));
                 $this->utils->enqueue_script('settings', 'settings.js', array('jquery'));
                 $this->utils->enqueue_script('admin', 'admin.js', array('jquery'));
