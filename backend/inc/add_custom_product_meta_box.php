@@ -2,8 +2,7 @@
 
 // Display Fields
 add_action('woocommerce_product_options_general_product_data', 'woocommerce_product_custom_fields');
-function woocommerce_product_custom_fields()
-{
+function woocommerce_product_custom_fields(){
     global $woocommerce, $post;
 
     echo '<div class="product_custom_field">';
@@ -58,14 +57,11 @@ add_action( 'add_meta_boxes', 'hide_product_custom_meta' );
 function hide_custom_meta(){
 
     global $woocommerce, $post;
+
     echo '<div class="options_group">';
     $countries_object  =   new WC_Countries();
     $countries         =   $countries_object->__get('countries');
     $selected_country = implode('', get_post_meta($post->ID, '_the_country_field'));
-
-    echo "<pre>";
-    var_dump($selected_country);
-    echo "</pre>";
 
     woocommerce_wp_select([
         'id'       => '_the_country_field',
@@ -102,37 +98,34 @@ function woocommerce_product_custom_fields_save($post_id){
 
 
     if( !empty($_POST['_the_country_field']) ){
-        update_post_meta($post_id,'_the_country_field', $_POST['_the_country_field']);
+        update_post_meta($post_id,'_the_country_field', sanitize_text_field($_POST['_the_country_field']));
     }
 
 }
 
-// Add a custom field to Admin coupon settings pages
-add_action( 'woocommerce_coupon_options', 'add_coupon_text_field', 10 );
-if( !function_exists('add_coupon_text_field')){
-    function add_coupon_text_field() {
-        woocommerce_wp_text_input( array(
-            'id'                => 'seller_id',
-            'label'             => __( 'Custom Option', 'woocommerce' ),
-            'placeholder'       => '',
-            'description'       => __( 'Custom Option', 'woocommerce' ),
-            'desc_tip'    => true,
 
-        ) );
+// // Product Visible for country based
+add_filter( 'woocommerce_product_is_visible', 'wplc_hide_product_if_country', 9999, 2 );
+function wplc_hide_product_if_country( $visible, $product_id ){
+    global $product;
+    global $selected_country;
+    $location = WC_Geolocation::geolocate_ip();
+    $country = $location['country'];
+    if ( $country == $selected_country && $product_id == 30 ) {
+        $visible = false;
+    }
+    return $visible;
+}
+
+
+add_action('save_post', 'mp_sync_on_product_save');
+function mp_sync_on_product_save( $con_value ){
+
+    if ( ! empty( $con_value ) ) {
+        update_post_meta( $con_value, '__the_country_field', esc_attr( $con_value ));
     }
 }
 
-// Save the custom field value from Admin coupon settings pages
-add_action( 'woocommerce_coupon_options_save', 'save_coupon_text_field', 10, 2 );
-if( ! function_exists('save_coupon_text_field')){
-    function save_coupon_text_field( $post_id, $coupon ) {
-
-        if( isset( $_POST['seller_id'] ) ) {
-            $coupon->update_meta_data( 'seller_id', sanitize_text_field( $_POST['seller_id'] ) );
-            $coupon->save();
-        }
-    }
-}
 
 
 
