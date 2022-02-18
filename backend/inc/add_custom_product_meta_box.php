@@ -5,6 +5,7 @@ add_action('woocommerce_product_options_general_product_data', 'woocommerce_prod
 function woocommerce_product_custom_fields()
 {
     global $woocommerce, $post;
+
     echo '<div class="product_custom_field">';
     // Custom Product Text Field
     woocommerce_wp_text_input(
@@ -15,6 +16,7 @@ function woocommerce_product_custom_fields()
             'desc_tip' => 'true'
         )
     );
+
     //Custom Product Number Field
     woocommerce_wp_text_input(
         array(
@@ -28,6 +30,7 @@ function woocommerce_product_custom_fields()
             )
         )
     );
+
     //Custom Product  Textarea
     woocommerce_wp_textarea_input(
         array(
@@ -38,10 +41,31 @@ function woocommerce_product_custom_fields()
     );
     echo '</div>';
 
+
+}
+
+function hide_product_custom_meta() {
+    add_meta_box(
+        'prfx_meta', __( 'Hide country', 'prfx-textdomain' ),
+        'hide_custom_meta',
+        'product',
+        'side',
+        ''
+    );
+}
+add_action( 'add_meta_boxes', 'hide_product_custom_meta' );
+
+function hide_custom_meta(){
+
+    global $woocommerce, $post;
     echo '<div class="options_group">';
     $countries_object  =   new WC_Countries();
     $countries         =   $countries_object->__get('countries');
     $selected_country = implode('', get_post_meta($post->ID, '_the_country_field'));
+
+    echo "<pre>";
+    var_dump($selected_country);
+    echo "</pre>";
 
     woocommerce_wp_select([
         'id'       => '_the_country_field',
@@ -56,8 +80,7 @@ function woocommerce_product_custom_fields()
 
 // Save Fields
 add_action('woocommerce_process_product_meta', 'woocommerce_product_custom_fields_save');
-function woocommerce_product_custom_fields_save($post_id)
-{
+function woocommerce_product_custom_fields_save($post_id){
 
     // Custom Product Text Field
     $woocommerce_custom_product_text_field = $_POST['_custom_product_text_field'];
@@ -84,56 +107,6 @@ function woocommerce_product_custom_fields_save($post_id)
 
 }
 
-/**
- * Adds a meta box to the Product editing screen right bar
- */
-function wplc_product_custom_meta() {
-    add_meta_box(
-            'prfx_meta', __( 'WP Location Logic', 'prfx-textdomain' ),
-            'new_wplc_product_custom_meta',
-            'product',
-            'side',
-            ''
-    );
-}
-add_action( 'add_meta_boxes', 'wplc_product_custom_meta' );
-
-function new_wplc_product_custom_meta() {
-    global $woocommerce, $post;
-    $countries_object  =   new WC_Countries();
-    $countries         =   $countries_object->__get('countries');
-    $selected_country = implode('', get_post_meta($post->ID, '_the_country_field'));
-//    $selected_country = get_post_meta($post->ID, '_the_country_field');
-
-    echo "<pre>";
-    var_dump($selected_country);
-    echo "</pre>";
-
-
-    echo '<div class="options_group">';
-    woocommerce_wp_select([
-        'id'       => '_the_country_field',
-        'label'    => __( 'Select a country', 'woocommerce' ),
-        'selected' => true,
-        'value'    => $selected_country,
-        'options' => $countries,
-    ]);
-
-    echo '</div>';
-
-}
-add_action('woocommerce_process_product_meta', 'woocommerce_product_thumb_show_condition');
-function woocommerce_product_thumb_show_condition($post_id)
-{
-    if( !empty($_POST['_the_country_field']) ){
-        update_post_meta($post_id,'_the_country_field', $_POST['_the_country_field']);
-    }
-
-}
-
-
-
-
 // Add a custom field to Admin coupon settings pages
 add_action( 'woocommerce_coupon_options', 'add_coupon_text_field', 10 );
 if( !function_exists('add_coupon_text_field')){
@@ -149,7 +122,6 @@ if( !function_exists('add_coupon_text_field')){
     }
 }
 
-
 // Save the custom field value from Admin coupon settings pages
 add_action( 'woocommerce_coupon_options_save', 'save_coupon_text_field', 10, 2 );
 if( ! function_exists('save_coupon_text_field')){
@@ -164,32 +136,6 @@ if( ! function_exists('save_coupon_text_field')){
 
 
 
-
-
-//// Adding Meta container to admin shop_coupon pages
-//add_action( 'add_meta_boxes', 'add_custom_coupon_meta_box' );
-//if ( ! function_exists( 'add_custom_coupon_meta_box' ) )
-//{
-//    function add_custom_coupon_meta_box()
-//    {
-//        add_meta_box(
-//            'coupon_usage_data', __('Usage data','woocommerce'),
-//            'custom_coupon_meta_box_content',
-//            'shop_coupon',
-//            'side',
-//            'core'
-//        );
-//    }
-//}
-//
-//// Displaying content in the meta container on admin shop_coupon pages
-//if ( ! function_exists( 'custom_coupon_meta_box_content' ) )
-//{
-//    function custom_coupon_meta_box_content() {
-//
-//
-//    }
-//}
 
 
 

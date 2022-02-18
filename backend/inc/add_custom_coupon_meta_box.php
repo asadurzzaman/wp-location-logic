@@ -141,5 +141,30 @@ function my_logic_function(){
 }
 
 
+//// Adding Meta container to admin shop_coupon pages
+//add_action( 'add_meta_boxes', 'add_custom_coupon_meta_box' );
+//if ( ! function_exists( 'add_custom_coupon_meta_box' ) )
+//{
+//    function add_custom_coupon_meta_box()
+//    {
+//        add_meta_box(
+//            'coupon_usage_data', __('Usage data','woocommerce'),
+//            'custom_coupon_meta_box_content',
+//            'shop_coupon',
+//            'side',
+//            'core'
+//        );
+//    }
+//}
+//
+//// Displaying content in the meta container on admin shop_coupon pages
+//if ( ! function_exists( 'custom_coupon_meta_box_content' ) )
+//{
+//    function custom_coupon_meta_box_content() {
+//
+//
+//    }
+//}
+
 
 
