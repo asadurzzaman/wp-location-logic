@@ -120,9 +120,6 @@ function save_variation_settings_fields( $variation_id, $loop ) {
 
 
 
-
-
-
 // Shortcode
 add_shortcode('logic_help', 'my_logic_function');
 function my_logic_function(){
@@ -177,6 +174,8 @@ function action_woocommerce_coupon_options_usage_restriction( $coupon_get_id, $c
 }
 add_action( 'woocommerce_coupon_options_usage_restriction', 'action_woocommerce_coupon_options_usage_restriction',
     10, 2 );
+
+
 
 
 // Save
