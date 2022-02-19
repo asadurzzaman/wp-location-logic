@@ -120,9 +120,6 @@ function save_variation_settings_fields( $variation_id, $loop ) {
 
 
 
-
-
-
 // Shortcode
 add_shortcode('logic_help', 'my_logic_function');
 function my_logic_function(){
@@ -163,6 +160,56 @@ function my_logic_function(){
     echo $country_name;
 
 }
+
+// Add new field - usage restriction tab
+function action_woocommerce_coupon_options_usage_restriction( $coupon_get_id, $coupon ) {
+    woocommerce_wp_text_input( array(
+        'id' => 'customer_user_role',
+        'label' => __( 'WPCL User role restrictions', 'woocommerce' ),
+        'placeholder' => __( 'No restrictions', 'woocommerce' ),
+        'description' => __( 'List of allowed user roles. Separate user roles with commas.', 'woocommerce' ),
+        'desc_tip' => true,
+        'type' => 'text',
+    ));
+}
+add_action( 'woocommerce_coupon_options_usage_restriction', 'action_woocommerce_coupon_options_usage_restriction',
+    10, 2 );
+
+
+
+
+// Save
+function action_woocommerce_coupon_options_save( $post_id, $coupon ) {
+    update_post_meta( $post_id, 'customer_user_role', $_POST['customer_user_role'] );
+}
+add_action( 'woocommerce_coupon_options_save', 'action_woocommerce_coupon_options_save', 10, 2 );
+
+// Valid
+function filter_woocommerce_coupon_is_valid( $is_valid, $coupon, $discount ) {
+    // Get meta
+    $customer_user_role = $coupon->get_meta('customer_user_role');
+
+    // NOT empty
+    if( ! empty( $customer_user_role ) ) {
+        // Convert string to array
+        $customer_user_role = explode(', ', $customer_user_role);
+
+        // Get current user role
+        $user = wp_get_current_user();
+        $roles = ( array ) $user->roles;
+
+        // Compare
+        $compare = array_diff( $roles, $customer_user_role );
+
+        // NOT empty
+        if ( ! empty ( $compare ) ) {
+            $is_valid = false;
+        }
+    }
+
+    return $is_valid;
+}
+add_filter( 'woocommerce_coupon_is_valid', 'filter_woocommerce_coupon_is_valid', 10, 3 );
 
 
 
