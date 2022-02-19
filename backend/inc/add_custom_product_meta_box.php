@@ -205,17 +205,18 @@ function custom_dynamic_sale_price_html( $price_html, $product ) {
 //}
 //add_filter( 'woocommerce_billing_fields', 'wpcl_simplify_checkout_virtual' );
 
-function njengah_override_checkout_fields( $fields ) {
-
-    unset($fields['billing']['billing_country']);
-
-    return $fields;
-
-}
-
-add_filter('woocommerce_checkout_fields','njengah_override_checkout_fields');
+//function njengah_override_checkout_fields( $fields ) {
+//
+//    unset($fields['billing']['billing_country']);
+//
+//    return $fields;
+//
+//}
+//
+//add_filter('woocommerce_checkout_fields','njengah_override_checkout_fields');
 
 function new_woocommerce_checkout_fields($fields){
+
     $geoloc = WC_Geolocation::geolocate_ip();
     $country_name = $geoloc['country'];
 
@@ -244,7 +245,9 @@ function new_woocommerce_checkout_fields($fields){
         default:
             $country_name = "Other Country!";
     }
-    echo $country_name;
+    //echo $country_name;
+
+    $fields['billing']['billing_country'] = $country_name;
 
     echo '<select class="">';
     echo '<option value="'.$country_name.'">'.$country_name.'</option>';
@@ -252,10 +255,9 @@ function new_woocommerce_checkout_fields($fields){
 
  return $fields;
 }
-add_action('woocommerce_billing_fields', 'new_woocommerce_checkout_fields');
+add_action('woocommerce_checkout_fields', 'new_woocommerce_checkout_fields');
 ?>
 
+func
 
-
-</select>
 
