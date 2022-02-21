@@ -33,7 +33,7 @@
                     </div>
                     <div class="all_select_condition">
                         <div class="single_condition">
-                            <select name="" id="geolocation_based" class="wplcation_select2">
+                            <select name="" id="geolocation_based" class="wplcation_select2" >
                                 <?php
                                 global $woocommerce;
                                 $countries_object  =   new WC_Countries();
