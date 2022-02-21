@@ -1,6 +1,5 @@
 <?php
 
-
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -10,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
          * */
         add_action('woocommerce_product_data_tabs', 'wpll_custom_product_meta_tab');
         add_action( 'woocommerce_product_data_panels', 'wpll_product_panels' );
-        add_filter( 'woocommerce_product_is_visible', 'wplc_hide_product_if_country', 9999, 2 );
+        //add_filter( 'woocommerce_product_is_visible', 'wplc_hide_product_if_country', 9999, 2 );
         add_action( 'add_meta_boxes',  'add_product_custom_image' );
         add_action('woocommerce_process_product_meta', 'wpll_product_custom_fields_save');
 

@@ -116,10 +116,6 @@ function save_variation_settings_fields( $variation_id, $loop ) {
 }
 
 
-
-
-
-
 // Shortcode
 add_shortcode('logic_help', 'my_logic_function');
 function my_logic_function(){
