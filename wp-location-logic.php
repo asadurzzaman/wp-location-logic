@@ -33,5 +33,6 @@ require_once WP_LOCATION_LOGIC_PATH . 'backend/class-wp-location-logic-admin.php
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_coupon_meta_box.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_product_meta_box.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/WPll_Settings_Custom_Tab.php';
+require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/Wpll_Single_Product_Attributes.php';
 
 

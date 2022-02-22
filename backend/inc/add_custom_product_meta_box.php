@@ -64,35 +64,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                      data-placeholder="<?php __('Choose countries&hellip;','location-logic'); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>">
 
                 <?php
-
-
                     foreach ( $countries as $key => $val ) {
-
-                        echo '<option value="'.$key.'">'.$val.'</option>';
-
-    echo '<option value="' . esc_attr( $key ) . '" ' . selected( in_array( $key, $selected_country ), true, false ) .'>' . $val . '</option>';
+                        echo '<option value="' . esc_attr( $key ) . '">' . $val . '</option>';
                     }
-
                 ?>
 
             </select>
         </p>
-<?php
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <?php
+        if( empty( $countries ) ) {
+            echo "<p><b>" .__( "You need to setup shipping locations in WooCommerce settings ", 'woo-product-country-base-restrictions')." <a href='admin.php?page=wc-settings'> ". __( "HERE", 'woo-product-country-base-restrictions' )."</a> ".__( "before you can choose country restrictions", 'woo-product-country-base-restrictions' )."</b></p>";
+        }
 
 //        woocommerce_wp_select([
 //            'id'       => '_type_role_country_list',
@@ -103,42 +85,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 //            'class'     =>  'wplcation_select2',
 //           ' multiple' =>'multiple',
 //        ]);
-
-//        $text_value = get_post_meta( get_the_ID(), 'misha_plugin_version', true );
-//        woocommerce_wp_text_input( array(
-//            'id'                => 'misha_plugin_version',
-//            'value'             => $text_value,
-//            'label'             => 'Plugin version',
-//            'description'       => 'Description when desc_tip param is not true'
-//        ) );
-//
-//        woocommerce_wp_textarea_input( array(
-//            'id'          => 'misha_changelog',
-//            'value'       => get_post_meta( get_the_ID(), 'misha_changelog', true ),
-//            'label'       => 'Changelog',
-//            'desc_tip'    => true,
-//            'description' => 'Prove the plugin changelog here',
-//        ) );
-//
-//        woocommerce_wp_select( array(
-//            'id'          => 'misha_ext',
-//            'value'       => get_post_meta( get_the_ID(), 'misha_ext', true ),
-//            'wrapper_class' => 'show_if_downloadable',
-//            'label'       => 'File extension',
-//            'selected' => true,
-//            'options'     => array( '' => 'Please select', 'zip' => 'Zip', 'gzip' => 'Gzip'),
-//        ) );
-//
-//        woocommerce_wp_text_input(
-//            array(
-//                'id' => '_custom_product_text_field',
-//                'placeholder' => 'Custom Product Text Field',
-//                'label' => __('Custom Product Text Field', 'woocommerce'),
-//                'desc_tip' => 'true'
-//            )
-//        );
-
-
 
         echo '</div>';
 
@@ -155,21 +101,34 @@ if ( ! defined( 'ABSPATH' ) ) {
             update_post_meta ($post_id, '_wpll_country_restriction_type_role',  sanitize_text_field($_POST['_wpll_country_restriction_type_role']));
         }
 
-//        if( !empty($_POST['_type_role_country_list']) ){
-//            update_post_meta($post_id,'_type_role_country_list', sanitize_text_field($_POST['_type_role_country_list']));
-//        }
+        if( !empty($_POST['$country_type_attribute']) ){
+            update_post_meta($post_id,'$country_type_attribute', sanitize_text_field($_POST['$country_type_attribute']));
+        }
 
-//        if (!empty( $_POST['_custom_product_text_field'] )){
-//            update_post_meta ($post_id, '_custom_product_text_field',  sanitize_text_field($_POST['_custom_product_text_field']));
+//        if (!empty( $_POST['my_text_field'] )){
+//            update_post_meta ($post_id, 'my_text_field',  sanitize_text_field($_POST['my_text_field']));
 //        }
 //
 //        if (!empty( $_POST['_regular_product_field'] )){
 //            update_post_meta($post_id, '_regular_product_field', sanitize_text_field($_POST['_regular_product_field']));
 //        }
-
-
-
     }
+
+
+
+
+//    function WPll_single_product_attribute(){
+//
+//
+//    }
+
+
+
+
+
+
+
+
 
 
     /*
@@ -204,6 +163,16 @@ if ( ! defined( 'ABSPATH' ) ) {
         echo "<h4>Image Upload Option</h4>";
 
     }
+
+
+
+
+
+
+
+
+
+
 
 
 // // Product Visible for country based

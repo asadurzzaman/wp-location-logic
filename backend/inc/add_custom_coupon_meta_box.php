@@ -88,24 +88,31 @@ function wpcl_adv_product_options(){
 
 
 //// Custom Filed Product variation
-///
 add_action( 'woocommerce_product_after_variable_attributes', 'variation_settings_fields', 10, 3 );
 add_action( 'woocommerce_save_product_variation', 'save_variation_settings_fields', 10, 2 );
 add_filter( 'woocommerce_available_variation', 'load_variation_settings_fields' );
 
 function variation_settings_fields( $loop, $variation_data, $variation ) {
-    woocommerce_wp_textarea_input(
+
+    woocommerce_wp_select(
         array(
-            'id'            => "my_text_field{$loop}",
-            'name'          => "my_text_field[{$loop}]",
-            'value'         => get_post_meta( $variation->ID, 'my_text_field', true ),
-            'label'         => __( 'WPC Text', 'woocommerce' ),
-            'desc_tip'      => true,
-            'description'   => __( 'Some description.', 'woocommerce' ),
-            'wrapper_class' => 'form-row form-row-full',
+            'id'      => '_wpll_country_restriction_type_role_by_attribute',
+            'label'   => __( 'Rule of Restriction', 'location-logic' ),
+            'default'       => 'all',
+            'style'			=> 'max-width:450px;width:100%;',
+            'class'         => 'availability wpll_restricted_type',
+            'selected' => true,
+            'options'       => array(
+                'all'       => __( 'Available all countries', 'location-logic' ),
+                'specific'  => __( 'Available selected countries', 'location-logic' ),
+                'excluded'  => __( 'Not Available selected countries', 'location-logic' ),
+            )
         )
     );
+
 }
+
+
 
 function save_variation_settings_fields( $variation_id, $loop ) {
     $text_field = $_POST['my_text_field'][ $loop ];
