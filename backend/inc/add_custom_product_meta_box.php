@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'id'      => '_wpll_country_restriction_type_role',
                 'label'   => __( 'Rule of Restriction', 'location-logic' ),
                 'default'       => 'all',
-                'style'			=> 'max-width:450px;width:100%;',
+                'style'			=> 'max-width:350px;width:100%;',
                 'class'         => 'availability wpll_restricted_type wplcation_select2',
                 'selected' => true,
                 'options'       => array(
