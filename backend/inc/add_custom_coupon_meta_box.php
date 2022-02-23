@@ -82,65 +82,6 @@ function wpcl_adv_product_options(){
     echo '</div>';
 }
 
-
-//// Custom Filed Product variation
-add_action( 'woocommerce_product_after_variable_attributes', 'variation_settings_fields', 10, 3 );
-add_action( 'woocommerce_save_product_variation', 'save_variation_settings_fields', 10, 2 );
-add_filter( 'woocommerce_available_variation', 'load_variation_settings_fields' );
-
-function variation_settings_fields( $loop, $variation_data, $variation ) {
-    global $woocommerce;
-    global $post;
-    woocommerce_wp_select(
-        array(
-            'id'      => '_wpll_country_restriction_type_role_by_attribute',
-            'label'   => __( 'Rule of Restriction', 'location-logic' ),
-            'default'       => 'all',
-           'style'			=> 'width:100%;',
-            'class'         => 'availability wpll_restricted_type',
-            'selected' => true,
-            'options'       => array(
-                'all'       => __( 'Available all countries', 'location-logic' ),
-                'specific'  => __( 'Available selected countries', 'location-logic' ),
-                'excluded'  => __( 'Not Available selected countries', 'location-logic' ),
-            )
-        )
-    );
-    $selected_country = implode('', get_post_meta($post->ID, '_type_role_country_list'));
-    $countries_object  =   new WC_Countries();
-    $countries         =   $countries_object->__get('countries');
-    ?>
-    <p class="form-field forminp restricted_countries">
-
-        <label for="_type_role_country_list"><?php echo __( 'Select countries', 'location-logic' ); ?></label>
-        <select id="_type_role_country_list" name="_type_role_country_list" class="wplcation_select2"
-                data-placeholder="<?php __('Choose countries&hellip;','location-logic'); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>">
-
-            <?php
-            foreach ( $countries as $key => $val ) {
-                echo '<option value="' . esc_attr( $key ) . '">' . $val . '</option>';
-            }
-            ?>
-
-        </select>
-    </p>
-    <?php
-    if( empty( $countries ) ) {
-        echo "<p><b>" .__( "You need to setup shipping locations in WooCommerce settings ", 'woo-product-country-base-restrictions')." <a href='admin.php?page=wc-settings'> ". __( "HERE", 'woo-product-country-base-restrictions' )."</a> ".__( "before you can choose country restrictions", 'woo-product-country-base-restrictions' )."</b></p>";
-    }
-}
-
-
-
-function save_variation_settings_fields( $variation_id, $loop ) {
-    $text_field = $_POST['my_text_field'][ $loop ];
-
-    if ( ! empty( $text_field ) ) {
-        update_post_meta( $variation_id, 'my_text_field', esc_attr( $text_field ));
-    }
-}
-
-
 // Shortcode
 add_shortcode('logic_help', 'my_logic_function');
 function my_logic_function(){
