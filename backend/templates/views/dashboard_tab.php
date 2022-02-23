@@ -12,6 +12,8 @@
             <li class="tab_item" data-target="redirects">Redirects</li>
             <li class="tab_item" data-target="integrations">Integrations</li>
             <li class="tab_item" data-target="woocommerce">Woocommerce</li>
+            <li class="tab_item" data-target="logic_zone">Lozic Zone</li>
+            <li class="tab_item" data-target="woocommerce">Woocommerce</li>
             <li class="tab_item" data-target="setting">Setting</li>
         </ul>
     </header>

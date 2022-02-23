@@ -6,10 +6,7 @@ global $product;
 add_action( 'woocommerce_coupon_options', 'add_coupon_text_field', 10 );
 if( !function_exists('add_coupon_text_field')){
     function add_coupon_text_field() {
-
         global $woocommerce, $post;
-
-
         echo '<div class="options_group">';
         $countries_object  =   new WC_Countries();
         $countries         =   $countries_object->__get('countries');
@@ -19,6 +16,7 @@ if( !function_exists('add_coupon_text_field')){
             'id'       => '_hide_country_coupon',
             'label'    => __( 'Select', 'woocommerce' ),
             'selected' => true,
+            'class'     => 'wplcation_select2',
             'value'    => $hide_coupon_country,
             'options' => $countries,
         ]);
@@ -39,9 +37,6 @@ if( ! function_exists('save_coupon_text_field')){
         }
     }
 }
-
-
-
 
 /**
  * Extra Meta Box add on Woocommerce Product Price Below
@@ -70,6 +65,7 @@ function wpcl_adv_product_options(){
         'id'      => 'super_product',
         'value'   => get_post_meta( get_the_ID(), 'super_product', true ),
         'label'   => 'This is a super product',
+        'class'     => 'wplcation_select2',
         'options' =>  $options,
         'desc_tip' => true,
         'description' => 'If it is not a regular WooCommerce product',
@@ -88,24 +84,30 @@ function wpcl_adv_product_options(){
 
 
 //// Custom Filed Product variation
-///
 add_action( 'woocommerce_product_after_variable_attributes', 'variation_settings_fields', 10, 3 );
 add_action( 'woocommerce_save_product_variation', 'save_variation_settings_fields', 10, 2 );
 add_filter( 'woocommerce_available_variation', 'load_variation_settings_fields' );
 
 function variation_settings_fields( $loop, $variation_data, $variation ) {
-    woocommerce_wp_textarea_input(
+
+    woocommerce_wp_select(
         array(
-            'id'            => "my_text_field{$loop}",
-            'name'          => "my_text_field[{$loop}]",
-            'value'         => get_post_meta( $variation->ID, 'my_text_field', true ),
-            'label'         => __( 'WPC Text', 'woocommerce' ),
-            'desc_tip'      => true,
-            'description'   => __( 'Some description.', 'woocommerce' ),
-            'wrapper_class' => 'form-row form-row-full',
+            'id'      => '_wpll_country_restriction_type_role_by_attribute',
+            'label'   => __( 'Rule of Restriction', 'location-logic' ),
+            'default'       => 'all',
+           'style'			=> 'width:100%;',
+            'class'         => 'availability wpll_restricted_type',
+            'selected' => true,
+            'options'       => array(
+                'all'       => __( 'Available all countries', 'location-logic' ),
+                'specific'  => __( 'Available selected countries', 'location-logic' ),
+                'excluded'  => __( 'Not Available selected countries', 'location-logic' ),
+            )
         )
     );
 }
+
+
 
 function save_variation_settings_fields( $variation_id, $loop ) {
     $text_field = $_POST['my_text_field'][ $loop ];
