@@ -65,7 +65,7 @@ function wpcl_adv_product_options(){
         'id'      => 'super_product',
         'value'   => get_post_meta( get_the_ID(), 'super_product', true ),
         'label'   => 'This is a super product',
-        'class'     => 'wplcation_select2',
+//        'class'     => 'wplcation_select2',
         'options' =>  $options,
         'desc_tip' => true,
         'description' => 'If it is not a regular WooCommerce product',
@@ -89,7 +89,8 @@ add_action( 'woocommerce_save_product_variation', 'save_variation_settings_field
 add_filter( 'woocommerce_available_variation', 'load_variation_settings_fields' );
 
 function variation_settings_fields( $loop, $variation_data, $variation ) {
-
+    global $woocommerce;
+    global $post;
     woocommerce_wp_select(
         array(
             'id'      => '_wpll_country_restriction_type_role_by_attribute',
@@ -105,6 +106,28 @@ function variation_settings_fields( $loop, $variation_data, $variation ) {
             )
         )
     );
+    $selected_country = implode('', get_post_meta($post->ID, '_type_role_country_list'));
+    $countries_object  =   new WC_Countries();
+    $countries         =   $countries_object->__get('countries');
+    ?>
+    <p class="form-field forminp restricted_countries">
+
+        <label for="_type_role_country_list"><?php echo __( 'Select countries', 'location-logic' ); ?></label>
+        <select id="_type_role_country_list" name="_type_role_country_list" class="wplcation_select2"
+                data-placeholder="<?php __('Choose countries&hellip;','location-logic'); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>">
+
+            <?php
+            foreach ( $countries as $key => $val ) {
+                echo '<option value="' . esc_attr( $key ) . '">' . $val . '</option>';
+            }
+            ?>
+
+        </select>
+    </p>
+    <?php
+    if( empty( $countries ) ) {
+        echo "<p><b>" .__( "You need to setup shipping locations in WooCommerce settings ", 'woo-product-country-base-restrictions')." <a href='admin.php?page=wc-settings'> ". __( "HERE", 'woo-product-country-base-restrictions' )."</a> ".__( "before you can choose country restrictions", 'woo-product-country-base-restrictions' )."</b></p>";
+    }
 }
 
 
