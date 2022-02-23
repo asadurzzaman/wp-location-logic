@@ -6,10 +6,7 @@ global $product;
 add_action( 'woocommerce_coupon_options', 'add_coupon_text_field', 10 );
 if( !function_exists('add_coupon_text_field')){
     function add_coupon_text_field() {
-
         global $woocommerce, $post;
-
-
         echo '<div class="options_group">';
         $countries_object  =   new WC_Countries();
         $countries         =   $countries_object->__get('countries');
@@ -19,6 +16,7 @@ if( !function_exists('add_coupon_text_field')){
             'id'       => '_hide_country_coupon',
             'label'    => __( 'Select', 'woocommerce' ),
             'selected' => true,
+            'class'     => 'wplcation_select2',
             'value'    => $hide_coupon_country,
             'options' => $countries,
         ]);
@@ -39,9 +37,6 @@ if( ! function_exists('save_coupon_text_field')){
         }
     }
 }
-
-
-
 
 /**
  * Extra Meta Box add on Woocommerce Product Price Below
@@ -70,6 +65,7 @@ function wpcl_adv_product_options(){
         'id'      => 'super_product',
         'value'   => get_post_meta( get_the_ID(), 'super_product', true ),
         'label'   => 'This is a super product',
+        'class'     => 'wplcation_select2',
         'options' =>  $options,
         'desc_tip' => true,
         'description' => 'If it is not a regular WooCommerce product',
@@ -99,7 +95,7 @@ function variation_settings_fields( $loop, $variation_data, $variation ) {
             'id'      => '_wpll_country_restriction_type_role_by_attribute',
             'label'   => __( 'Rule of Restriction', 'location-logic' ),
             'default'       => 'all',
-            'style'			=> 'max-width:450px;width:100%;',
+           'style'			=> 'width:100%;',
             'class'         => 'availability wpll_restricted_type',
             'selected' => true,
             'options'       => array(
@@ -109,7 +105,6 @@ function variation_settings_fields( $loop, $variation_data, $variation ) {
             )
         )
     );
-
 }
 
 

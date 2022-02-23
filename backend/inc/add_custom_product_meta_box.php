@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <p class="form-field forminp restricted_countries">
 
             <label for="_type_role_country_list"><?php echo __( 'Select countries', 'location-logic' ); ?></label>
-            <select id="_type_role_country_list" name="_type_role_country_list" class="wplcation_select2"
+            <select multiple="multiple" id="_type_role_country_list" name="_type_role_country_list" class="wplcation_select2"
                      data-placeholder="<?php __('Choose countries&hellip;','location-logic'); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>">
 
                 <?php
