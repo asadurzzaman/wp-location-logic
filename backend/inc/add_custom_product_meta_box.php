@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
      * */
     add_action('woocommerce_product_data_tabs', 'wpll_custom_product_meta_tab');
     add_action( 'woocommerce_product_data_panels', 'wpll_product_panels' );
-    //add_filter( 'woocommerce_product_is_visible', 'wpll_hide_product_if_country', 9999, 2 );
     add_action( 'add_meta_boxes',  'add_product_custom_image' );
     add_action('woocommerce_process_product_meta', 'wpll_product_custom_fields_save');
 
@@ -52,23 +51,27 @@ if ( ! defined( 'ABSPATH' ) ) {
             )
         );
 
-        $selected_country = implode('', get_post_meta($post->ID, '_type_role_country_list'));
-        $countries_object  =   new WC_Countries();
-        $countries         =   $countries_object->__get('countries');
-        //var_dump($countries);
+        $selections = get_post_meta( $post->ID, '_restricted_countries', true );
+
+        if(empty($selections) || ! is_array($selections)) {
+            $selections = array();
+        }
+        $countries_obj   = new WC_Countries();
+        $countries   = $countries_obj->__get('countries');
+        asort( $countries );
     ?>
         <p class="form-field forminp restricted_countries">
-
-            <label for="_type_role_country_list"><?php echo __( 'Select countries', 'location-logic' ); ?></label>
-            <select multiple="multiple" id="_type_role_country_list" name="_type_role_country_list" class="wplcation_select2"
-                     data-placeholder="<?php __('Choose countries&hellip;','location-logic'); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>">
-
+            <label for="_restricted_countries"><?php echo __( 'Select countries', 'woo-product-country-base-restrictions' ); ?></label>
+            <select id="_restricted_countries" multiple="multiple" name="_restricted_countries[]" style="width:100%;max-width: 350px;"
+                    data-placeholder="<?php esc_attr_e( 'Choose countries&hellip;', 'woocommerce' ); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>"
+                    class="wc-enhanced-select" >
                 <?php
+                if ( ! empty( $countries ) ) {
                     foreach ( $countries as $key => $val ) {
-                        echo '<option value="' . esc_attr( $key ) . '">' . $val . '</option>';
+                        echo '<option value="' . esc_attr( $key ) . '" ' . selected( in_array( $key, $selections ), true, false ).'>' . $val . '</option>';
                     }
+                }
                 ?>
-
             </select>
         </p>
         <?php
@@ -105,30 +108,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             update_post_meta($post_id,'$country_type_attribute', sanitize_text_field($_POST['$country_type_attribute']));
         }
 
-//        if (!empty( $_POST['my_text_field'] )){
-//            update_post_meta ($post_id, 'my_text_field',  sanitize_text_field($_POST['my_text_field']));
-//        }
-//
-//        if (!empty( $_POST['_regular_product_field'] )){
-//            update_post_meta($post_id, '_regular_product_field', sanitize_text_field($_POST['_regular_product_field']));
-//        }
     }
-
-
-
-
-//    function WPll_single_product_attribute(){
-//
-//
-//    }
-
-
-
-
-
-
-
-
 
 
     /*

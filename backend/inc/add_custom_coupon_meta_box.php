@@ -106,22 +106,27 @@ function variation_settings_fields( $loop, $variation_data, $variation ) {
             )
         )
     );
-    $selected_country = implode('', get_post_meta($post->ID, '_type_role_country_list'));
-    $countries_object  =   new WC_Countries();
-    $countries         =   $countries_object->__get('countries');
+    $selections = get_post_meta( $variation->ID, '_restricted_countries', true );
+    if(empty($selections) || ! is_array($selections)) {
+        $selections = array();
+    }
+    $countries_obj   = new WC_Countries();
+    $countries   = $countries_obj->__get('countries');
+    asort( $countries );
+
     ?>
     <p class="form-field forminp restricted_countries">
-
-        <label for="_type_role_country_list"><?php echo __( 'Select countries', 'location-logic' ); ?></label>
-        <select id="_type_role_country_list" name="_type_role_country_list" class="wplcation_select2"
-                data-placeholder="<?php __('Choose countries&hellip;','location-logic'); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>">
-
+        <label for="_restricted_countries[<?php echo $variation->ID; ?>]"><?php echo __( 'Select countries', 'woo-product-country-base-restrictions' ); ?></label>
+        <select multiple="multiple" name="_restricted_countries[<?php echo $variation->ID; ?>][]" style="width:100%;max-width: 350px;"
+                data-placeholder="<?php esc_attr_e( 'Choose countries&hellip;', 'woocommerce' ); ?>" title="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>"
+                class="wc-enhanced-select">
             <?php
-            foreach ( $countries as $key => $val ) {
-                echo '<option value="' . esc_attr( $key ) . '">' . $val . '</option>';
+            if ( ! empty( $countries ) ) {
+                foreach ( $countries as $key => $val ) {
+                    echo '<option value="' . esc_attr( $key ) . '" ' . selected( in_array( $key, $selections ), true, false ).'>' . $val . '</option>';
+                }
             }
             ?>
-
         </select>
     </p>
     <?php
