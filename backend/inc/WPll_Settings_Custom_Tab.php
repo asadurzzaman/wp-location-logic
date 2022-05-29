@@ -64,4 +64,4 @@ class WPll_Settings_Custom_Tab
 
 }
 
-WPll_Settings_Custom_Tab::init();
+new WPll_Settings_Custom_Tab();
