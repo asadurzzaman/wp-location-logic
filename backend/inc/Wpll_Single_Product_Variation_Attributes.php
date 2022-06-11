@@ -17,8 +17,16 @@ if( !class_exists( "Wpll_Single_Product_Variation_Attributes" ) ){
         }
 
         public function init() {
-//            add_action('woocommerce_product_after_variable_attributes', array( $this, 'wpll_variation_settings_fields',
-//            10, 3));
+
+
+            //// Custom Filed Product variation
+//			add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variation_settings_fields', 10, 3 ) );
+//			add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation_settings_fields', 10, 2 ) );
+//			add_filter( 'woocommerce_available_variation', array( $this, 'load_variation_settings_fields' ) );
+
+
+			add_action('woocommerce_product_after_variable_attributes', array( $this, 'wpll_variation_settings_fields',
+                10, 3));
             add_action('woocommerce_save_product_variation', array( $this, 'save_wpll_variation_settings_fields', 10,
                 2));
 
@@ -32,7 +40,8 @@ if( !class_exists( "Wpll_Single_Product_Variation_Attributes" ) ){
         */
         function wpll_variation_settings_fields( $variation)
         {
-
+            global $post;
+            echo '<div id="wpll_product_data" class="panel woocommerce_options_panel hidden">';
             woocommerce_wp_select(
                 array(
                     'id' => '_wpll_country_restriction_role_attribute[' . $variation->ID . ']',
@@ -82,7 +91,11 @@ if( !class_exists( "Wpll_Single_Product_Variation_Attributes" ) ){
             if (empty($countries)) {
                 echo "<p><b>" . __("You need to setup shipping locations in WooCommerce settings ", 'location-logic') . " <a href='admin.php?page=wc-settings'> " . __("HERE", 'location-logic') . "</a> " . __("before you can choose country restrictions", 'location-logic') . "</b></p>";
             }
+            echo '</div>';
         }
+
+
+
 
         /*
         * Save the product meta settings for variation product
@@ -108,6 +121,8 @@ if( !class_exists( "Wpll_Single_Product_Variation_Attributes" ) ){
             }
             update_post_meta($post_id, '_attribute_restricted_countries', $countries);
         }
+
+
 
     }
 }
