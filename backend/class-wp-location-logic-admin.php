@@ -18,8 +18,6 @@ if (!class_exists('WPLocationLogicAdmin')) {
             add_action("admin_menu", array($this, 'wp_location_logic_admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'wp_location_logic_admin_enqueue'));
             add_action( 'plugin_action_links_' . WP_LOCATION_LOGIC_BASE_PATH, array( $this, 'wp_location_logic_action_links') );
-//            $this->db = new WpLocationLogicDB($this);
-//            new TwinkleSMTPAdminAjax($this);
 
         }
 
@@ -42,7 +40,6 @@ if (!class_exists('WPLocationLogicAdmin')) {
             if($page == "toplevel_page_wp-location-logic"){
                 $this->utils->enqueue_style('select2', 'select2.min.css');
                 $this->utils->enqueue_style('admin', 'admin.css');
-
                 $this->utils->enqueue_script('analytics', 'analytics.js', array('jquery'));
                 $this->utils->enqueue_script('settings', 'settings.js', array('jquery'));
                 $this->utils->enqueue_script('admin', 'admin.js', array('jquery'));

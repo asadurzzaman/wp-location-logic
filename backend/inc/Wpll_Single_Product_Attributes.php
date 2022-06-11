@@ -25,10 +25,6 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
 		}
 
 		public function init() {
-			//// Custom Filed Product variation
-//			add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variation_settings_fields', 10, 3 ) );
-//			add_action( 'woocommerce_save_product_variation', array( $this, 'save_variation_settings_fields', 10, 2 ) );
-//			add_filter( 'woocommerce_available_variation', array( $this, 'load_variation_settings_fields' ) );
 
             add_action('woocommerce_product_data_tabs', array( $this, 'wpll_custom_product_meta_tab'));
             add_action('woocommerce_product_data_panels', array( $this, 'wpll_product_panels'));
@@ -59,6 +55,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
 
             global $post;
             echo '<div id="wpll_product_data" class="panel woocommerce_options_panel hidden">';
+            echo '<div class="options_group"><h4 style="padding-left: 12px;font-size: 14px;">Country Based Restrictions</h4>';
             $select_country_type = get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true);
             woocommerce_wp_select(
                 array(
@@ -88,7 +85,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
             <p class="form-field forminp restricted_countries">
                 <label for="_restricted_countries"><?php echo __('Select countries', 'location-logic'); ?></label>
                 <select id="_restricted_countries" multiple="multiple" name="_restricted_countries[]"
-                        style="width:100%;max-width: 350px;"
+                        style="max-width: 350px;width:100%;"
                         data-placeholder="<?php esc_attr_e('Choose countries&hellip;', 'location-logic'); ?>"
                         title="<?php esc_attr_e('Country', 'location-logic') ?>"
                         class="wc-enhanced-select">
