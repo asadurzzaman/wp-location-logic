@@ -1,5 +1,13 @@
 <?php
 
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+    die;
+}
+
+global $woocommerce;
+global $product;
+
 if( !class_exists( "Wpll_Single_Product_Variation_Attributes" ) ){
     class Wpll_Single_Product_Variation_Attributes
     {
