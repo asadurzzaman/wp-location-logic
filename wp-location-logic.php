@@ -17,7 +17,7 @@
 if ( ! defined( 'WPINC' ) ) {
     die;
 }
-define( 'WP_LOCATION_LOGIC_VERSION', '0.0.1' );
+define( 'WP_LOCATION_LOGIC_VERSION', '1.0.0' );
 defined( 'WP_LOCATION_LOGIC_PATH' ) or define( 'WP_LOCATION_LOGIC_PATH', plugin_dir_path( __FILE__ ) );
 defined( 'WP_LOCATION_LOGIC_URL' ) or define( 'WP_LOCATION_LOGIC_URL', plugin_dir_url( __FILE__ ) );
 defined( 'WP_LOCATION_LOGIC_BASE_FILE' ) or define( 'WP_LOCATION_LOGIC_BASE_FILE', __FILE__ );
@@ -30,11 +30,12 @@ defined( 'WP_LOCATION_LOGIC_JS_DIR' ) or define( 'WP_LOCATION_LOGIC_JS_DIR', plu
 require_once WP_LOCATION_LOGIC_PATH . 'includes/WPLocationLogic.php';
 //require_once WP_LOCATION_LOGIC_PATH . 'backend/templates/views/class-twinkle-smtp-ajax.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/class-wp-location-logic-admin.php';
-//require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_coupon_meta_box.php';
+require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_coupon_meta_box.php';
 //require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/add_custom_product_meta_box.php';
 //require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/WPll_Settings_Custom_Tab.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/Wpll_Single_Product_Attributes.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/Wpll_Single_Product_Variation_Attributes.php';
+require_once WP_LOCATION_LOGIC_PATH . 'frontend/view/single-product-restriction.php';
 
 function enqueue_select2_jquery() {
     wp_register_style( 'select2css', plugin_dir_url( __FILE__ ) . 'assets/css/select2.min.css', false, '1.0', 'all' );
@@ -46,4 +47,36 @@ function enqueue_select2_jquery() {
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
+
+
+function wpll_user_ip_address(){
+
+    $PublicIP = $_SERVER['REMOTE_ADDR'];
+
+    $url = "http://ipinfo.io/$PublicIP?token=9c4cc2f08f266b";
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $resp = curl_exec($curl);
+    $json     = json_decode($resp, true);
+    curl_close($curl);
+
+
+
+    $iptimezone =  $json['timezone'];
+    $ip =  $json['ip'];
+    $city =  $json['city'];
+    $region =  $json['region'];
+    $country =  $json['country'];
+    $postal =  $json['postal'];
+
+    if( $country == 'BD'){
+        echo "Hello Bangladesh! Now your time zone .$iptimezone.";
+    }else{
+        echo "Hello Other Country, Now your time zone .$iptimezone.";
+    }
+    echo $country;
+}
+add_action('wp_footer','wpll_user_ip_address');
 
