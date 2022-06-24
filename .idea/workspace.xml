@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28bc2bd0-33a3-45aa-9f27-772db0baa55c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Attributes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Attributes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Variation_Attributes.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Variation_Attributes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/inc/add_custom_product_meta_box.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/inc/add_custom_product_meta_box.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/inc/add_custom_coupon_meta_box.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/inc/add_custom_coupon_meta_box.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wp-location-logic.php" beforeDir="false" afterPath="$PROJECT_DIR$/wp-location-logic.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wp-location-logic.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+            <state relative-caret-position="494">
+              <caret line="73" column="26" lean-forward="true" selection-start-line="73" selection-start-column="26" selection-end-line="73" selection-end-column="26" />
               <folding>
                 <element signature="e#6#409#0#PHP" expanded="true" />
               </folding>
@@ -35,11 +33,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/inc/add_custom_coupon_meta_box.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-656">
-              <caret line="53" column="39" lean-forward="true" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+            <state relative-caret-position="-1369">
+              <caret line="159" selection-start-line="159" selection-end-line="159" />
               <folding>
-                <element signature="n#div#0;n#!!top" />
-                <element signature="n#div#1;n#!!top" />
+                <element signature="n#style#0;n#select#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#p#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#6115#6504#0#PHP" />
+                <element signature="e#6551#6973#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -53,6 +54,8 @@
       <find>_wpll_country_restriction_type_role</find>
       <find>_restricted_countries</find>
       <find>_attribute_restricted_countries</find>
+      <find>filter_woocommerce_coupon_is_valid</find>
+      <find>$values</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -64,11 +67,14 @@
         <option value="$PROJECT_DIR$/backend/inc/add_custom_product_meta_box.php" />
         <option value="$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Variation_Attributes.php" />
         <option value="$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Attributes.php" />
+        <option value="$PROJECT_DIR$/frontend/view/single-product-resttriction.php" />
+        <option value="$PROJECT_DIR$/frontend/view/single-product-restriction.php" />
+        <option value="$PROJECT_DIR$/backend/inc/add_custom_coupon_meta_box.php" />
         <option value="$PROJECT_DIR$/wp-location-logic.php" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="240" />
     <option name="y" value="130" />
     <option name="width" value="1440" />
@@ -86,22 +92,6 @@
               <item name="wp-location-logic" type="b2602c69:ProjectViewProjectNode" />
               <item name="wp-location-logic" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="wp-location-logic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wp-location-logic" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wp-location-logic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wp-location-logic" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="inc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wp-location-logic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wp-location-logic" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -110,8 +100,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../woocommerce-coupon-restrictions" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -142,12 +133,12 @@
       <workItem from="1655663774714" duration="227000" />
       <workItem from="1655707854518" duration="1022000" />
       <workItem from="1656051488341" duration="1529000" />
-      <workItem from="1656070934029" duration="5429000" />
+      <workItem from="1656070934029" duration="16268000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8238000" />
+    <option name="totallyTimeSpent" value="19077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -231,31 +222,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/view/single-product-restriction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/inc/Wpll_Single_Product_Variation_Attributes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="53" column="17" lean-forward="true" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
-          <folding>
-            <element signature="e#1942#1978#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="697">
+          <caret line="61" column="17" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="61" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/inc/add_custom_coupon_meta_box.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-656">
-          <caret line="53" column="39" lean-forward="true" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        <state relative-caret-position="-1369">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
           <folding>
-            <element signature="n#div#0;n#!!top" />
-            <element signature="n#div#1;n#!!top" />
+            <element signature="n#style#0;n#select#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#p#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#6115#6504#0#PHP" />
+            <element signature="e#6551#6973#0#PHP" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wp-location-logic.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+        <state relative-caret-position="494">
+          <caret line="73" column="26" lean-forward="true" selection-start-line="73" selection-start-column="26" selection-end-line="73" selection-end-column="26" />
           <folding>
             <element signature="e#6#409#0#PHP" expanded="true" />
           </folding>
