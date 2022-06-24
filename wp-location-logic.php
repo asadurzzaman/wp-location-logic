@@ -17,7 +17,7 @@
 if ( ! defined( 'WPINC' ) ) {
     die;
 }
-define( 'WP_LOCATION_LOGIC_VERSION', '0.0.1' );
+define( 'WP_LOCATION_LOGIC_VERSION', '1.0.0' );
 defined( 'WP_LOCATION_LOGIC_PATH' ) or define( 'WP_LOCATION_LOGIC_PATH', plugin_dir_path( __FILE__ ) );
 defined( 'WP_LOCATION_LOGIC_URL' ) or define( 'WP_LOCATION_LOGIC_URL', plugin_dir_url( __FILE__ ) );
 defined( 'WP_LOCATION_LOGIC_BASE_FILE' ) or define( 'WP_LOCATION_LOGIC_BASE_FILE', __FILE__ );
