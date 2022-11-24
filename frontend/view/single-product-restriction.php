@@ -41,7 +41,15 @@ if( !class_exists('Wpll_single_product_restriction')){
         */
 
         function init(){
+            add_action('woocommerce_before_single_product', array($this, 'wpll_product_show_hide') );
+        }
 
+        function wpll_product_show_hide( $default_data ){
+            
+            echo "hello";
+
+
+            return $default_data;
         }
 
     }
