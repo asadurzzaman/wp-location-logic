@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       WP Location Logic
  * Plugin URI:        https://wplocationlogic.com
- * Description:
+ * Description:       Plugin Descriptions
  * Version:           0.0.1
  * Author:            Asad
  * Author URI:        https://wordpress.org/plugins/wp-location-logic
@@ -11,8 +11,6 @@
  * Text Domain:       location-logic
  * Domain Path:       /languages
  */
-
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
     die;
@@ -49,34 +47,33 @@ add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
 
 
-function wpll_user_ip_address(){
+// function wpll_user_ip_address(){
 
-    $PublicIP = $_SERVER['REMOTE_ADDR'];
+//     $PublicIP = $_SERVER['REMOTE_ADDR'];
 
-    $url = "http://ipinfo.io/$PublicIP?token=9c4cc2f08f266b";
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//     $url = "http://ipinfo.io/$PublicIP?token=9c4cc2f08f266b";
+//     $curl = curl_init($url);
+//     curl_setopt($curl, CURLOPT_URL, $url);
+//     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-    $resp = curl_exec($curl);
-    $json     = json_decode($resp, true);
-    curl_close($curl);
+//     $resp = curl_exec($curl);
+//     $json     = json_decode($resp, true);
+//     curl_close($curl);
 
 
 
-    $iptimezone =  $json['timezone'];
-    $ip =  $json['ip'];
-    $city =  $json['city'];
-    $region =  $json['region'];
-    $country =  $json['country'];
-    $postal =  $json['postal'];
+//     $iptimezone =  $json['timezone'];
+//     $ip =  $json['ip'];
+//     $city =  $json['city'];
+//     $region =  $json['region'];
+//     $country =  $json['country'];
+//     $postal =  $json['postal'];
 
-    if( $country == 'BD'){
-        echo "Hello Bangladesh! Now your time zone .$iptimezone.";
-    }else{
-        echo "Hello Other Country, Now your time zone .$iptimezone.";
-    }
-    echo $country;
-}
-add_action('wp_footer','wpll_user_ip_address');
-
+//     if( $country == 'BD'){
+//         echo "Hello Bangladesh! Now your time zone .$iptimezone.";
+//     }else{
+//         echo "Hello Other Country, Now your time zone .$iptimezone.";
+//     }
+//     echo $country;
+// }
+// add_action('wp_footer','wpll_user_ip_address');
