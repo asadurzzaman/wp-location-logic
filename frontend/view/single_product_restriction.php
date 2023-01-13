@@ -47,7 +47,7 @@ if( !class_exists('Wpll_single_product_restriction')){
         * @since 1.0.0
         */
         function init(){
-            //add_action('woocommerce_after_add_to_cart_button', array($this, 'wpll_product_show_hide') );
+            add_action('woocommerce_after_add_to_cart_button', array($this, 'wpll_product_show_hide') );
         }
 
         function wpll_product_show_hide( $default_data ){
