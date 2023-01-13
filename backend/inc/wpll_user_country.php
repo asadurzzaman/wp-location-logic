@@ -73,5 +73,5 @@ if(!function_exists('wpll_user_country')){
         }
 
     }
-    new wpll_user_country();
+    // new wpll_user_country();
 }
