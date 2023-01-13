@@ -221,9 +221,7 @@ class WPLL_Product_Restriction{
 	*
 	* @since 1.0.0
 	*/
-    function default_message()
-    {
-
+    function default_message() {
         return    apply_filters('cbr_restricted_product_message', __('Sorry, this product is not available to purchase in your country.', 'woo-product-country-base-restrictions'));
     }
 
