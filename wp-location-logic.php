@@ -54,7 +54,7 @@ function get_client_ip()
 {
     $geoloc = WC_Geolocation::geolocate_ip();
     foreach ($geoloc as $loc) {
-        echo $loc;
+        echo "My Current Location " . $loc;
     }
 }
 
