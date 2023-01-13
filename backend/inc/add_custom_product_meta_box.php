@@ -87,6 +87,7 @@ function wpll_product_panels()
     }
 
     echo '</div>';
+    
 
 }
 
