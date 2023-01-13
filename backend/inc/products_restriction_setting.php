@@ -47,7 +47,7 @@ if( !class_exists('wpll_products_restriction_setting')){
         * @since 1.0.0
         */
         function init(){
-            add_action('woocommerce_single_product_summary', array($this, 'is_product_restricted_by_id'));
+            add_action('woocommerce_after_add_to_cart_button', array($this, 'is_product_restricted_by_id'));
         }
 
         /*
