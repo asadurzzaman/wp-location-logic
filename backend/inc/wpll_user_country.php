@@ -55,21 +55,11 @@ if(!function_exists('wpll_user_country')){
             add_action('woocommerce_after_add_to_cart_button', array($this, 'get_user_contry'));
         }
  
-        function get_user_contry() {
+        function get_user_contry( $user_ip) {
+            
+            $geoloc = WC_Geolocation::geolocate_ip();
 
-            $PublicIP = $_SERVER['REMOTE_ADDR'];
-
-            $url = "http://ipinfo.io/$PublicIP?token=9c4cc2f08f266b";
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_URL, $url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-            $resp = curl_exec($curl);
-            $json     = json_decode($resp, true);
-            curl_close($curl);
-            $country =  $json['country'];
-            return true;
-            echo $country;
+            return $user_ip;
         }
 
     }
