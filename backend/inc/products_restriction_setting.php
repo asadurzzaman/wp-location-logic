@@ -47,8 +47,11 @@ if( !class_exists('wpll_products_restriction_setting')){
         * @since 1.0.0
         */
         function init(){
-            add_action('woocommerce_after_add_to_cart_button', array($this, 'is_product_restricted_by_id'));
+            add_action('woocommerce_after_add_to_cart_button', array($this, 'is_product_restricted_by_id')); 
+            
         }
+
+ 
 
         /*
         * check restricted by the product id for simple product
@@ -66,14 +69,21 @@ if( !class_exists('wpll_products_restriction_setting')){
                 if ( empty($countries) || !is_array($countries)  )
                     $countries = array();
 
-                $customer_country = $country_obj->get_user_contry();
+                $customer_country = $this->get_user_contry();
 
                 if ( 'specific' == $restriction && !in_array($customer_country, $countries) )
                     return true;
-                if ( 'excluded' == $restriction && in_array($customer_country, $countries))
-                    return true;
+                if ( 'excluded' == $restriction && in_array($customer_country, $countries)){
+                    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+                }
+                     
             }
             return false;
+        }
+
+        function get_user_contry() {
+            $geoloc = WC_Geolocation::geolocate_ip();
+            return $geoloc;
         }
 
         /*

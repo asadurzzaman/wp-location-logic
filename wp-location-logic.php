@@ -35,7 +35,7 @@ require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/wpll_user_country.php';
 //require_once WP_LOCATION_LOGIC_PATH . 'frontend/inc/wpll_products_restriction.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/Wpll_Single_Product_Attributes.php';
 require_once WP_LOCATION_LOGIC_PATH . 'backend/inc/Wpll_Single_Product_Variation_Attributes.php';
-require_once WP_LOCATION_LOGIC_PATH . 'frontend/view/single_product_restriction.php';
+//require_once WP_LOCATION_LOGIC_PATH . 'frontend/view/single_product_restriction.php';
 
 function enqueue_select2_jquery() {
     wp_register_style( 'select2css', plugin_dir_url( __FILE__ ) . 'assets/css/select2.min.css', false, '1.0', 'all' );
@@ -54,7 +54,7 @@ function get_client_ip()
 {
     $geoloc = WC_Geolocation::geolocate_ip();
     foreach ($geoloc as $loc) {
-        echo "My Current Location " . $loc;
+        echo $loc;
     }
 }
 

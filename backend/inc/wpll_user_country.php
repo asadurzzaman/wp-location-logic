@@ -52,15 +52,15 @@ if(!function_exists('wpll_user_country')){
         */
         function init()
         {
-            add_action('woocommerce_after_add_to_cart_button', array($this, 'get_user_contry'));
+            //add_action('woocommerce_after_add_to_cart_button', array($this, 'get_user_contry'));
         }
  
-        function get_user_contry( $user_ip) {
-            
-            $geoloc = WC_Geolocation::geolocate_ip();
+        // function get_user_contry() {
 
-            return $user_ip;
-        }
+        //     $geoloc = WC_Geolocation::geolocate_ip();
+
+        //     return $geoloc;
+        // }
 
     }
     // new wpll_user_country();
