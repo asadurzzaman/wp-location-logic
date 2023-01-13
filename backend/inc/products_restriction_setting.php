@@ -58,30 +58,21 @@ if( !class_exists('wpll_products_restriction_setting')){
         function is_product_restricted_by_id(){
             $restriction = get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true);
             $country_obj = new wpll_user_country();
+            
 
-            if (
-                'specific' == $restriction || 'excluded' == $restriction
-            ) {
+            if ( 'specific' == $restriction || 'excluded' == $restriction ) {
                 $countries = get_post_meta(get_the_ID(), '_restricted_countries', true);
 
-                if (
-                    empty($countries) || !is_array($countries)
-                )
+                if ( empty($countries) || !is_array($countries)  )
                     $countries = array();
 
                 $customer_country = $country_obj->get_user_contry();
 
-                if (
-                    'specific' == $restriction && !in_array($customer_country, $countries)
-                )
+                if ( 'specific' == $restriction && !in_array($customer_country, $countries) )
                     return true;
-
-                if (
-                    'excluded' == $restriction && in_array($customer_country, $countries)
-                )
+                if ( 'excluded' == $restriction && in_array($customer_country, $countries))
                     return true;
             }
-
             return false;
         }
 
