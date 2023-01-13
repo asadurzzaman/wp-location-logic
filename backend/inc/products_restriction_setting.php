@@ -47,7 +47,33 @@ if( !class_exists('wpll_products_restriction_setting')){
         * @since 1.0.0
         */
         function init(){
+            //callback on activate plugin
+            register_activation_hook(__FILE__, array($this, 'on_activation'));
+
+            //hook for geolocation_update_database	
+            add_filter('woocommerce_maxmind_geolocation_update_database_periodically', array($this, 'update_geo_database'), 10, 1);
+
             add_action('woocommerce_after_add_to_cart_button', array($this, 'is_product_restricted_by_id'));
+        }
+
+        /**
+         * WC_Geolocation database update hooks
+         *
+         * @since 1.0.0
+         */
+        function on_activation()
+        {
+            WC_Integration_MaxMind_Geolocation::update_database();
+        }
+
+        /**
+         * update geo database
+         *
+         * @since 1.0.0
+         */
+        function update_geo_database()
+        {
+            return true;
         }
 
         /*

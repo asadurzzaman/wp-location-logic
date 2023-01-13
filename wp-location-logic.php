@@ -48,15 +48,15 @@ function enqueue_select2_jquery() {
 add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
 
-add_action('woocommerce_after_add_to_cart_button', 'get_client_ip');
+// add_action('woocommerce_after_add_to_cart_button', 'get_client_ip');
 
-function get_client_ip()
-{
-    $geoloc = WC_Geolocation::geolocate_ip();
-    foreach ($geoloc as $loc) {
-        echo $loc;
-    }
-}
+// function get_client_ip()
+// {
+//     $geoloc = WC_Geolocation::geolocate_ip();
+//     foreach ($geoloc as $loc) {
+//         echo $loc;
+//     }
+// }
 
 
 // function wpll_user_ip_address(){
