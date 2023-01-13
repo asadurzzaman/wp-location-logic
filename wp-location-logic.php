@@ -48,6 +48,16 @@ function enqueue_select2_jquery() {
 add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
 
+add_action('woocommerce_after_add_to_cart_button', 'get_client_ip');
+
+function get_client_ip()
+{
+    $geoloc = WC_Geolocation::geolocate_ip();
+    foreach ($geoloc as $loc) {
+        echo $loc;
+    }
+}
+
 
 // function wpll_user_ip_address(){
 
@@ -78,91 +88,3 @@ add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 // }
 // add_action('wp_footer','wpll_user_ip_address');
 
-
-
-// add_action('woocommerce_after_add_to_cart_button', 'custom_div_after_add_to_cart_button');
-// function custom_div_after_add_to_cart_button()
-// {
-//     $restriction = get_post_meta(get_the_ID(), '_restricted_countries', true);
-//     $select_country = get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true);
-    
-
-    
-
-//     // If there are saved countries, display them
-//     if (!empty($restriction) && is_array($restriction)) {
-//         echo "<p>". $select_country. "</p>";
-//         $countries_obj = new WC_Countries();  
-//         echo '<ul>'; 
-//         foreach ($restriction as $country_code => $country_name) {
-//             echo '<li>' . esc_html($country_name) . '</li>';
-//         } 
-//         echo '</ul>';
-//     }
-   
-// }
-
-
-// add_action('woocommerce_after_add_to_cart_button', 'is_restricted_by_id');
-// function is_restricted_by_id()
-// {
-//     $restriction = get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true);
-
-//     if (
-//         'specific' == $restriction || 'excluded' == $restriction
-//     ) {
-//         $countries = get_post_meta(get_the_ID(), '_restricted_countries', true);
-
-//         if (
-//             empty($countries) || !is_array($countries)
-//         )
-//             $countries = array();
-
-//         //$customer_country = $this->get_user_contry();
-//         $customer_country = 'BD';
-
-//         if (
-//             'specific' == $restriction && !in_array($customer_country, $countries)
-//         )
-//             return true;
-
-//         if (
-//             'excluded' == $restriction && in_array($customer_country, $countries)
-//         )
-//             return true;
-//     }
-
-//     return false;
-// }
-
-
-// Is purchasable
-// function filter_woocommerce_is_purchasable($purchasable, $product)
-// {
-//     // Array with product IDs
-//     $product_ids = array(30, 6104, 6242, 6243);
-
-//     // Get current product ID
-//     $product_id = $product->get_id();
-
-//     // Only for specific products
-//     if (in_array($product_id, $product_ids)) {
-//         // Get an instance of the WC_Geolocation object class
-//         $geolocation_instance = new WC_Geolocation();
-
-//         // Get user IP
-//         $user_ip_address = $geolocation_instance->get_ip_address();
-
-//         // Get geolocated user IP country code
-//         $user_geolocation = $geolocation_instance->geolocate_ip($user_ip_address);
-
-//         // For specific countries
-//         if (in_array($user_geolocation['country'], array('GB'))) {
-//             // NOT purchasable
-//             $purchasable = false;
-//         }
-//     }
-
-//     return $purchasable;
-// }
-// add_filter('woocommerce_is_purchasable', 'filter_woocommerce_is_purchasable', 10, 2);
