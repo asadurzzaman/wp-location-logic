@@ -52,10 +52,20 @@ add_action( 'admin_enqueue_scripts', 'enqueue_select2_jquery' );
 
 // function get_client_ip()
 // {
+//     global $post;
+//     $selections = get_post_meta($post->ID, '_restricted_countries', true);
+
+//     if (empty($selections) || !is_array($selections)) {
+//         $selections = array();
+//         echo $selections ;
+//     }
+
+
 //     $geoloc = WC_Geolocation::geolocate_ip();
 //     foreach ($geoloc as $loc) {
 //         echo $loc;
-//     }
+//     } 
+
 // }
 
 
