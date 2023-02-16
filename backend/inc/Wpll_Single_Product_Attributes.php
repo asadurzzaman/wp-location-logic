@@ -1,5 +1,11 @@
 <?php
-// If this file is called directly, abort.
+/**
+ * WPLL Single Product Attributes
+ *
+ * @package WPLL
+ * @since 1.0.0
+ */
+
 if (!defined('WPINC')) {
     die;
 }
@@ -23,6 +29,10 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
 			$this->init();
 		}
 
+        /*
+         * Init Product Panel for WPLL Setting
+         * @since 1.0.0
+         * */
 		public function init() {
 
             add_action('woocommerce_product_data_tabs', array( $this, 'wpll_custom_product_meta_tab'));
@@ -55,7 +65,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
             global $post;
             echo '<div id="wpll_product_data" class="panel woocommerce_options_panel hidden">';
             echo '<div class="options_group"><h4 style="padding-left: 12px;font-size: 14px;">Country Based Restrictions</h4>';
-            $select_country_type = get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true);
+            $select_country_type = get_post_meta($post->ID, '_wpll_country_restriction_type_role', true);
             woocommerce_wp_select(
                 array(
                     'id'        => '_wpll_country_restriction_type_role',
@@ -63,7 +73,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
                     'default'   => 'all',
                     'style'     => 'max-width:350px;width:100%;',
                     'class'     => 'availability wpll_restricted_type wplcation_select2',
-                    'value'     => get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true),
+                    'value'     => $select_country_type,
                     'options'   => array(
 	                        'all'       => __('Available all countries', 'location-logic'),
 	                        'specific'  => __('Available selected countries', 'location-logic'),
@@ -72,6 +82,10 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
                 )
             );
 
+            /**
+             * Get countries
+             * @since 1.0.0
+             */
             $selections = get_post_meta($post->ID, '_wpll_restricted_countries', true);
 
             if (empty($selections) || !is_array($selections)) {
@@ -81,7 +95,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
             $countries = $countries_obj->__get('countries');
             asort($countries);
             ?>
-            <p class="form-field forminp restricted_countries">
+            <p class="form-field form input restricted_countries">
                 <label for="_restricted_countries[<?php echo get_the_ID(); ?>]"><?php echo __('Select countries', 'location-logic');
                 ?></label>
                 <select id="_restricted_countries[<?php echo get_the_ID(); ?>]" multiple="multiple" name="_restricted_countries[<?php echo get_the_ID(); ?>][]"
@@ -107,27 +121,18 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
 
         }
 
+        
         /*
-         * Save All Meta Data Filed
-         *
+         * Save Product Panel for WPLL Setting
+         * @since 1.0.0
          * */
-        function wpll_product_custom_fields_save($post_id) {
+        function wpll_product_custom_fields_save($post_id) { 
+           
+            $wpll_country_restriction_type_role = isset($_POST['_wpll_country_restriction_type_role']) ? $_POST['_wpll_country_restriction_type_role'] : '';
+            update_post_meta($post_id, '_wpll_country_restriction_type_role', $wpll_country_restriction_type_role);
 
-
-            $restriction_country = sanitize_text_field($_POST['_wpll_country_restriction_type_role']);
-
-            if (!isset($_POST['_restricted_countries']) || empty($_POST['_restricted_countries'])) {
-                update_post_meta($post_id, '_wpll_country_restriction_type_role', 'all');
-            } else {
-                if (!empty($restriction_country))
-                    update_post_meta($post_id, '_wpll_country_restriction_type_role', $restriction_country);
-            }
-
-            $countries = array();
-            if (isset($_POST["_restricted_countries"])) {
-                $countries = wc_clean($_POST['_restricted_countries'][$post_id]);
-            }
-            update_post_meta($post_id, '_restricted_countries', $countries);
+            $wpll_restricted_countries = isset($_POST['_restricted_countries'][$post_id]) ? $_POST['_restricted_countries'][$post_id] : '';
+            update_post_meta($post_id, '_wpll_restricted_countries', $wpll_restricted_countries);
 
         }
 
