@@ -66,6 +66,9 @@ if( !class_exists('Wpll_single_product_restriction')){
                 } 
                 echo '</ul>';
             }
+
+
+            
             $PublicIP = $_SERVER['REMOTE_ADDR'];
 
             $url = "http://ipinfo.io/$PublicIP?token=9c4cc2f08f266b";

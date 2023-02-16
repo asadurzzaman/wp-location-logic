@@ -72,7 +72,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
                 )
             );
 
-            $selections = get_post_meta($post->ID, '_restricted_countries', true);
+            $selections = get_post_meta($post->ID, '_wpll_restricted_countries', true);
 
             if (empty($selections) || !is_array($selections)) {
                 $selections = array();
