@@ -55,7 +55,7 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
 
             return $default_data;
         }
-
+        
         /*
          * Product Panel for WPLL Setting
          * @since 1.0.0
