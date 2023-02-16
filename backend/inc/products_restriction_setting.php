@@ -136,7 +136,8 @@ if (!class_exists('wpll_products_restriction_setting')) {
             if ($this->is_restricted_product_by_id($product_id)) {
                 return true;
             }
-            if (($product) && ($product->get_type() == 'variation'  || $product->get_type() == 'variable-subscription' || $product->get_type() == 'subscription_variation')) {
+            if
+            ($product->get_type() == 'variation') {
                 $variations = $product->get_available_variations();
                 foreach ($variations as $variation) {
                     if ($this->is_restricted_product_by_id($variation['variation_id'])) {
