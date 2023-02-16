@@ -55,15 +55,15 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
             global $post;
             echo '<div id="wpll_product_data" class="panel woocommerce_options_panel hidden">';
             echo '<div class="options_group"><h4 style="padding-left: 12px;font-size: 14px;">Country Based Restrictions</h4>';
-            $select_country_type = get_post_meta(get_the_ID(), '_wpll_country_restriction_role_type', true);
+            $select_country_type = get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true);
             woocommerce_wp_select(
                 array(
-                    'id'        => '_wpll_country_restriction_role_type',
+                    'id'        => '_wpll_country_restriction_type_role',
                     'label'     => __('Rule of Restriction', 'location-logic'),
                     'default'   => 'all',
                     'style'     => 'max-width:350px;width:100%;',
                     'class'     => 'availability wpll_restricted_type wplcation_select2',
-                    'value'     => get_post_meta(get_the_ID(), '_wpll_country_restriction_role_type', true),
+                    'value'     => get_post_meta(get_the_ID(), '_wpll_country_restriction_type_role', true),
                     'options'   => array(
 	                        'all'       => __('Available all countries', 'location-logic'),
 	                        'specific'  => __('Available selected countries', 'location-logic'),
@@ -114,13 +114,13 @@ if ( !class_exists( 'WpllSingleProductAttributes' ) ) {
         function wpll_product_custom_fields_save($post_id) {
 
 
-            $restriction_country = sanitize_text_field($_POST['_wpll_country_restriction_role_type']);
+            $restriction_country = sanitize_text_field($_POST['_wpll_country_restriction_type_role']);
 
             if (!isset($_POST['_restricted_countries']) || empty($_POST['_restricted_countries'])) {
-                update_post_meta($post_id, '_wpll_country_restriction_role_type', 'all');
+                update_post_meta($post_id, '_wpll_country_restriction_type_role', 'all');
             } else {
                 if (!empty($restriction_country))
-                    update_post_meta($post_id, '_wpll_country_restriction_role_type', $restriction_country);
+                    update_post_meta($post_id, '_wpll_country_restriction_type_role', $restriction_country);
             }
 
             $countries = array();
