@@ -9,7 +9,8 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
+global $woocommerce;
+global $product;
 if( !class_exists('wpll_products_restriction_setting')){
     class wpll_products_restriction_setting{
         var $wpll_user_country = "";
@@ -65,7 +66,7 @@ if( !class_exists('wpll_products_restriction_setting')){
          */
         function is_valid_woocommerce_version()
         {
-            if (version_compare(WOOCOMMERCE_VERSION, '3.0.0', '>=')) {
+            if (version_compare(WC_VERSION, '3.0.0', '>=')) {
                 return true;
             }
             return false;
@@ -120,20 +121,19 @@ if( !class_exists('wpll_products_restriction_setting')){
          * Product restriction
          * @since 1.0.0
          */
-        function is_restricted($product)
+        function is_restricted($product_id)
         {
-            global $product;
+            $product = wc_get_product($product_id);
             if (is_numeric($product)) {
                 $product_id = $product;
             } else {
                 $product_id = $product->get_id();
             }
-
+        
             if ($this->is_restricted_product_by_id($product_id)) {
                 return true;
             } 
-            if
-            (($product) && ($product->get_type() == 'variation'  || $product->get_type() == 'variable-subscription' || $product->get_type() == 'subscription_variation')) {
+            if (($product) && ($product->get_type() == 'variation'  || $product->get_type() == 'variable-subscription' || $product->get_type() == 'subscription_variation')) {
                 $variations = $product->get_available_variations();
                 foreach ($variations as $variation) {
                     if ($this->is_restricted_product_by_id($variation['variation_id'])) {
