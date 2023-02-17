@@ -134,7 +134,7 @@ if( !class_exists('wpll_products_restriction_setting')){
                 return true;
             } 
             if (($product) && ($product->get_type() == 'variation'  || $product->get_type() == 'variable-subscription' || $product->get_type() == 'subscription_variation')) {
-                $variations = $product->get_available_variations();
+                $variations[] = $product->get_parent_id();  
                 foreach ($variations as $variation) {
                     if ($this->is_restricted_product_by_id($variation['variation_id'])) {
                         return true;
@@ -186,7 +186,7 @@ if( !class_exists('wpll_products_restriction_setting')){
          */
         function wpll_default_message()
         { 
-            $message = __('This product is not available in your country.', 'wpll');
+            $message = _e('This product is not available in your country.', 'location-logic');
             return $message;
         }
 
@@ -220,10 +220,10 @@ if( !class_exists('wpll_products_restriction_setting')){
          * admin notice for woocommerce version
          * @since 1.0.0
          */ 
-        function wpll_admin_error_notice()
+        function woocommerce_version_notice()
         { 
             $class = 'notice notice-error';
-            $message = __('WooCommerce Product Country Restrictions requires WooCommerce 3.0.0 or higher.', 'product-country-restrictions');
+            $message = _e('WooCommerce Product Country Restrictions requires WooCommerce 3.0.0 or higher.', 'location-logic');
 
             printf('<div class="%1$s"><p>%2$s</p></div>', esc_attr($class), esc_html($message));
         } 
